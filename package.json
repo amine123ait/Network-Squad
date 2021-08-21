@@ -9,16 +9,4 @@
   },
   "author":"Mr.echo",
   "license":"idk"
-}  
-{
-  "name":"Net squad group",
-  "description":"Tech group",
-  "version":"1.0.0",
-  "scripts": {
-    "build":"cp -r src/* dist/"
-
-  },
-  "author":"Mr.echo",
-  "license":"idk"
-}  
-
+} 
