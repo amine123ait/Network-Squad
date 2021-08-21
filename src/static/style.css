@@ -215,6 +215,173 @@ p {
 
 
 
+.fixed-nav-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  min-height: 100px;
+  padding: 0 25px;
+  box-sizing: border-box;
+  background-color: rgba(255,255,255,0.02);
+  box-shadow: 0 0 15px 2px rgba(0,0,0,0.5);
+  z-index: 100;
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+  transition: 0.35s ease;
+}
+.fixed-nav-bar .logo {
+  position: absolute;
+  left: 40px;
+  top: 50%;
+  transform: translateY(-50%);
+  text-transform: uppercase;
+  color: #ccc;
+  font-size: 28px;
+  font-weight: 300;
+  cursor: pointer;
+}
+.fixed-nav-bar .logo span {
+  color: #e78533;
+  font-weight: 600;
+}
+.fixed-nav-bar.scrolled {
+  min-height: 60px;
+  background-color: #fdfdfd;
+  box-shadow: 0 0 30px 3px rgba(0,0,0,0.6);
+}
+.fixed-nav-bar.scrolled .logo {
+  color: #000;
+}
+.fixed-nav-bar.scrolled .menu-button-label .white-bar {
+  background-color: #000;
+}
+.drop-down-container {
+  height: 15%;
+  width: 90%;
+  left: 160%;
+  margin-top: 5px;
+  transform: translateX(-50%);
+  transition: 0.3s ease;
+}
+.drop-down-item {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 8px;
+  bottom: 0;
+  background-color: #222;
+}
+.drop-down-item:before {
+  content: "";
+  position: absolute;
+  right: -8px;
+  height: 100%;
+  width: 8px;
+  transition: 0.25s ease;
+  background: linear-gradient(to left, #e78533 50%, #222 50%);
+  background-size: 200% 100%;
+  background-position: left;
+}
+.drop-down-item:hover::before {
+  background-position: right;
+}
+.the-bass {
+  position: fixed;
+  height: 0px;
+  width: 360px;
+  right: 0;
+  top: 100px;
+  background-color: rgba(0,0,0,0.7);
+  transition: 0.35s ease, height 0.35s 0.3s ease;
+  z-index: 90;
+}
+.the-bass.scrolled {
+  top: 60px;
+}
+.the-bass.dropped {
+  height: 60vh;
+  padding: 5px 0;
+  transition: 0.35s ease;
+}
+.the-bass.dropped .drop-down-container {
+  left: 50%;
+}
+.the-bass.dropped .drop-down-container:nth-child(1) {
+  transition: 0.3s ease, left 0.4s 0.4s ease;
+}
+.the-bass.dropped .drop-down-container:nth-child(2) {
+  transition: 0.3s ease, left 0.4s 0.46s ease;
+}
+.the-bass.dropped .drop-down-container:nth-child(3) {
+  transition: 0.3s ease, left 0.4s 0.52s ease;
+}
+.the-bass.dropped .drop-down-container:nth-child(4) {
+  transition: 0.3s ease, left 0.4s 0.58s ease;
+}
+.the-bass.dropped .drop-down-container:nth-child(5) {
+  transition: 0.3s ease, left 0.4s 0.64s ease;
+}
+.the-bass.dropped .drop-down-container:nth-child(6) {
+  transition: 0.3s ease, left 0.4s 0.7s ease;
+}
+.menu-button-label {
+  position: absolute;
+  height: 48px;
+  width: 48px;
+  top: 50%;
+  right: 25px;
+  transform: translateY(-50%);
+  transition: 0.4s ease;
+}
+.menu-button-label .white-bar {
+  position: absolute;
+  height: 2px;
+  width: 66%;
+  background-color: #ccc;
+  left: 50%;
+  transform: translateX(-50%);
+  transition: 0.4s ease, width 0.3s ease;
+}
+.menu-button-label .white-bar:nth-child(1) {
+  top: 24%;
+}
+.menu-button-label .white-bar:nth-child(2),
+.menu-button-label .white-bar:nth-child(3) {
+  top: 47%;
+}
+.menu-button-label .white-bar:nth-child(4) {
+  top: 71%;
+}
+#menuButton {
+  display: none;
+}
+#menuButton:checked+ .menu-button-label .white-bar:nth-child(1),
+#menuButton:checked+ .menu-button-label .white-bar:nth-child(4) {
+  width: 0%;
+}
+#menuButton:checked+ .menu-button-label .white-bar:nth-child(2) {
+  transform: translateX(-50%) rotate(45deg);
+}
+#menuButton:checked+ .menu-button-label .white-bar:nth-child(3) {
+  transform: translateX(-50%) rotate(-45deg);
+}
+.rela-block {
+  display: block;
+  position: relative;
+  overflow: hidden;
+}
+.cover-before::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+
+
 /*Shrinking for mobile*/
 @media (max-width: 768px) {
   .waves {
