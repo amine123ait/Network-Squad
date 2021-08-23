@@ -1,0 +1,2991 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>&#120445;&#120462;&#120477; &#120450;&#120474;&#120478;&#120458;&#120461; - infosec-blogs</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+
+    <style>
+        @font-face {
+            font-family: Whitney;
+            src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-300.woff);
+            font-weight: 300;
+        }
+
+        @font-face {
+            font-family: Whitney;
+            src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-400.woff);
+            font-weight: 400;
+        }
+
+        @font-face {
+            font-family: Whitney;
+            src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-500.woff);
+            font-weight: 500;
+        }
+
+        @font-face {
+            font-family: Whitney;
+            src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-600.woff);
+            font-weight: 600;
+        }
+
+        @font-face {
+            font-family: Whitney;
+            src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-700.woff);
+            font-weight: 700;
+        }
+
+        body {
+            background-color: #ffffff;
+            color: #23262a;
+            font-family: "Whitney", "Helvetica Neue", Helvetica, Arial, sans-serif;
+            font-size: 17px;
+            font-weight: 500;
+        }
+
+        a {
+            color: #0068e0;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        img {
+            object-fit: contain;
+        }
+
+        .markdown {
+            max-width: 100%;
+            line-height: 1.3;
+            overflow-wrap: break-word;
+        }
+
+        .preserve-whitespace {
+            white-space: pre-wrap;
+        }
+
+        .spoiler-text {
+            background-color: rgba(0, 0, 0, 0.1);
+            border-radius: 3px;
+        }
+
+        .spoiler-text--hidden {
+            cursor: pointer;
+            background-color: #b9bbbe;
+            color: rgba(0, 0, 0, 0);
+        }
+
+        .spoiler-text--hidden:hover {
+            background-color: rgba(185, 187, 190, 0.8);
+        }
+
+        .spoiler-text--hidden::selection {
+            color: rgba(0, 0, 0, 0);
+        }
+
+        .quote {
+            display: flex;
+            margin: 0.05em 0;
+        }
+
+        .quote::before {
+            content: "";
+            margin-right: 0.5em;
+            border: 2px solid #c7ccd1;
+            border-radius: 3px;
+        }
+
+        .pre {
+            background-color: #f9f9f9;
+            font-family: "Consolas", "Courier New", Courier, monospace;
+        }
+
+        .pre--multiline {
+            margin-top: 0.25em;
+            padding: 0.5em;
+            border: 2px solid #f3f3f3;
+            border-radius: 5px;
+            color: #657b83;
+        }
+
+        .pre--multiline.hljs {
+            background-color: #f9f9f9;
+            color: #657b83;
+        }
+
+        .pre--inline {
+            padding: 2px;
+            border-radius: 3px;
+            font-size: 0.85em;
+        }
+
+        .mention {
+            border-radius: 3px;
+            padding: 0 2px;
+            color: #7289da;
+            background-color: rgba(114, 137, 218, .1);
+            font-weight: 500;
+        }
+
+        .timestamp {
+            border-radius: 3px;
+            padding: 0 2px;
+            background-color: rgba(6, 6, 7, 0.08);
+        }
+
+        .emoji {
+            width: 1.325em;
+            height: 1.325em;
+            margin: 0 0.06em;
+            vertical-align: -0.4em;
+        }
+
+        .emoji--small {
+            width: 1em;
+            height: 1em;
+        }
+
+        .emoji--large {
+            width: 2.8em;
+            height: 2.8em;
+        }
+
+        .preamble {
+            display: grid;
+            margin: 0 0.3em 0.6em 0.3em;
+            max-width: 100%;
+            grid-template-columns: auto 1fr;
+        }
+
+        .preamble__guild-icon-container {
+            grid-column: 1;
+        }
+
+        .preamble__guild-icon {
+            max-width: 88px;
+            max-height: 88px;
+        }
+
+        .preamble__entries-container {
+            grid-column: 2;
+            margin-left: 0.6em;
+        }
+
+        .preamble__entry {
+            font-size: 1.4em;
+            color: #2f3136;
+        }
+
+        .preamble__entry--small {
+            font-size: 1em;
+        }
+
+        .chatlog {
+            max-width: 100%;
+        }
+
+        .chatlog__message-group {
+            display: grid;
+            margin: 0 0.6em;
+            padding: 0.9em 0;
+            border-top: 1px solid #eceeef;
+            grid-template-columns: auto 1fr;
+        }
+
+        .chatlog__reference-symbol {
+            grid-column: 1;
+            margin: 8px 4px 4px 18px;
+            border-left: 2px solid #c7ccd1;
+            border-top: 2px solid #c7ccd1;
+            border-radius: 8px 0 0 0;
+        }
+
+        .chatlog__reference {
+            display: flex;
+            grid-column: 2;
+            margin-bottom: 0.25em;
+            font-size: 0.875em;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            align-items: center;
+            color: #5f5f60;
+        }
+
+        .chatlog__reference-avatar {
+            border-radius: 50%;
+            width: 16px;
+            height: 16px;
+            margin-right: 0.25em;
+        }
+
+        .chatlog__reference-name {
+            margin-right: 0.3em;
+            font-weight: 600;
+        }
+
+        .chatlog__reference-content {
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .chatlog__reference-content a:hover {
+            text-decoration: none;
+        }
+
+        .chatlog__reference-link {
+            cursor: pointer;
+            color: #5f5f60;
+        }
+
+        .chatlog__reference-link * {
+            display: inline;
+            pointer-events: none;
+        }
+
+        .chatlog__reference-link:hover {
+            color: #2f3136;
+        }
+
+        .chatlog__reference-link:hover *:not(.spoiler-text) {
+            color: #2f3136;
+        }
+
+        .chatlog__reference-edited-timestamp {
+            margin-left: 0.25em;
+            font-size: 0.8em;
+            color: #747f8d;
+        }
+
+        .chatlog__author-avatar-container {
+            grid-column: 1;
+            width: 40px;
+            height: 40px;
+            margin-right: 16px;
+        }
+
+        .chatlog__author-avatar {
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+        }
+
+        .chatlog__messages {
+            grid-column: 2;
+            min-width: 50%;
+        }
+
+        .chatlog__author-name {
+            font-weight: 600;
+            color: #2f3136;
+        }
+
+        .chatlog__timestamp {
+            margin-left: 0.3em;
+            font-size: 0.75em;
+            color: #747f8d;
+        }
+
+        .chatlog__message {
+            padding: 0.1em 0.3em;
+            margin: 0 -0.3em;
+            background-color: transparent;
+            transition: background-color 1s ease;
+        }
+
+        .chatlog__message--highlighted {
+            background-color: rgba(114, 137, 218, 0.2);
+        }
+
+        .chatlog__message--pinned {
+            background-color: rgba(249, 168, 37, 0.05);
+        }
+
+        .chatlog__content {
+            font-size: 0.95em;
+            word-wrap: break-word;
+        }
+
+        .chatlog__edited-timestamp {
+            margin-left: 0.15em;
+            font-size: 0.8em;
+        }
+
+        .chatlog__attachment {
+            display: inline-block;
+            position: relative;
+            margin-top: 0.3em;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .chatlog__attachment--hidden {
+            cursor: pointer;
+            box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.1);
+        }
+
+        .chatlog__attachment--hidden * {
+            pointer-events: none;
+        }
+
+        .chatlog__attachment-spoiler-caption {
+            display: none;
+            z-index: 999;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            padding: 0.4em 0.8em;
+            background-color: rgba(0, 0, 0, 0.9);
+            border-radius: 20px;
+            color: #dcddde;
+            font-size: 0.9em;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+        }
+
+        .chatlog__attachment--hidden .chatlog__attachment-spoiler-caption {
+            display: block;
+        }
+
+        .chatlog__attachment--hidden:hover .chatlog__attachment-spoiler-caption {
+            color: #fff;
+        }
+
+        .chatlog__attachment-media {
+            vertical-align: top;
+            max-width: 45vw;
+            max-height: 500px;
+            border-radius: 3px;
+        }
+
+        .chatlog__attachment--hidden .chatlog__attachment-media {
+            filter: blur(44px);
+        }
+
+        .chatlog__attachment-generic {
+            width: 100%;
+            max-width: 520px;
+            height: 40px;
+            padding: 10px;
+            background-color: #f2f3f5;
+            border: 1px solid #ebedef;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .chatlog__attachment--hidden .chatlog__attachment-generic {
+            filter: blur(44px);
+        }
+
+        .chatlog__attachment-generic-icon {
+            float: left;
+            width: 30px;
+            height: 100%;
+            margin-right: 10px;
+        }
+
+        .chatlog__attachment-generic-size {
+            color: #72767d;
+            font-size: 12px;
+        }
+
+        .chatlog__attachment-generic-name {
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+
+        .chatlog__edited-timestamp {
+            color: #747f8d;
+        }
+
+        .chatlog__embed {
+            display: flex;
+            margin-top: 0.3em;
+            max-width: 520px;
+        }
+
+        .chatlog__embed-color-pill {
+            flex-shrink: 0;
+            width: 0.25em;
+            border-top-left-radius: 3px;
+            border-bottom-left-radius: 3px;
+        }
+
+        .chatlog__embed-color-pill--default {
+            background-color: rgba(227, 229, 232, 1);
+        }
+
+        .chatlog__embed-content-container {
+            display: flex;
+            flex-direction: column;
+            padding: 0.5em 0.6em;
+            background-color: rgba(249, 249, 249, 0.3);
+            border: 1px solid rgba(204, 204, 204, 0.3);
+            border-top-right-radius: 3px;
+            border-bottom-right-radius: 3px;
+        }
+
+        .chatlog__embed-content {
+            display: flex;
+            width: 100%;
+        }
+
+        .chatlog__embed-text {
+            flex: 1;
+        }
+
+        .chatlog__embed-author {
+            display: flex;
+            margin-bottom: 0.3em;
+            align-items: center;
+        }
+
+        .chatlog__embed-author-icon {
+            margin-right: 0.5em;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+        }
+
+        .chatlog__embed-author-name {
+            font-size: 0.875em;
+            font-weight: 600;
+            color: #4f545c
+        }
+
+        .chatlog__embed-author-name-link {
+            color: #4f545c;
+        }
+
+        .chatlog__embed-title {
+            margin-bottom: 0.2em;
+            font-size: 0.875em;
+            font-weight: 600;
+            color: #4f545c;
+        }
+
+        .chatlog__embed-description {
+            font-weight: 500;
+            font-size: 0.85em;
+            color: #2e3338;
+        }
+
+        .chatlog__embed-fields {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0 0.5em;
+        }
+
+        .chatlog__embed-field {
+            flex: 0;
+            min-width: 100%;
+            max-width: 506px;
+            padding-top: 0.6em;
+            font-size: 0.875em;
+        }
+
+        .chatlog__embed-field--inline {
+            flex: 1;
+            flex-basis: auto;
+            min-width: 150px;
+        }
+
+        .chatlog__embed-field-name {
+            margin-bottom: 0.2em;
+            font-weight: 600;
+            color: #36393e;
+        }
+
+        .chatlog__embed-field-value {
+            font-weight: 500;
+            color: #2e3338;
+        }
+
+        .chatlog__embed-thumbnail {
+            flex: 0;
+            margin-left: 1.2em;
+            max-width: 80px;
+            max-height: 80px;
+            border-radius: 3px;
+        }
+
+        .chatlog__embed-image-container {
+            margin-top: 0.6em;
+        }
+
+        .chatlog__embed-image {
+            max-width: 500px;
+            max-height: 400px;
+            border-radius: 3px;
+        }
+
+        .chatlog__embed-footer {
+            margin-top: 0.6em;
+            color: #2e3338;
+        }
+
+        .chatlog__embed-footer-icon {
+            margin-right: 0.2em;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            vertical-align: middle;
+        }
+
+        .chatlog__embed-footer-text {
+            vertical-align: middle;
+            font-size: 0.75em;
+            font-weight: 500;
+        }
+
+        .chatlog__embed-plainimage {
+            vertical-align: top;
+            max-width: 45vw;
+            max-height: 500px;
+            border-radius: 3px;
+        }
+
+        .chatlog__embed-spotify {
+            border: 0;
+        }
+
+        .chatlog__embed-youtube-container {
+            margin-top: 0.6em;
+        }
+
+        .chatlog__embed-youtube {
+            border: 0;
+            border-radius: 3px;
+        }
+
+        .chatlog__reactions {
+            display: flex;
+        }
+
+        .chatlog__reaction {
+            display: flex;
+            align-items: center;
+            margin: 0.35em 0.1em 0.1em 0.1em;
+            padding: 0.2em 0.35em;
+            background-color: rgba(79, 84, 92, 0.06);
+            border-radius: 3px;
+        }
+
+        .chatlog__reaction-count {
+            min-width: 9px;
+            margin-left: 0.35em;
+            font-size: 0.875em;
+            color: #747f8d;
+        }
+
+        .chatlog__bot-tag {
+            position: relative;
+            top: -.1em;
+            margin-left: 0.3em;
+            padding: 0.05em 0.3em;
+            border-radius: 3px;
+            line-height: 1.3;
+            background-color: #5865F2;
+            color: #ffffff;
+            font-size: 0.625em;
+            font-weight: 500;
+        }
+
+        .postamble {
+            margin: 1.4em 0.3em 0.6em 0.3em;
+            padding: 1em;
+            border-top: 1px solid #eceeef;
+        }
+
+        .postamble__entry {
+            color: #2f3136;
+        }
+    </style>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/solarized-light.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.pre--multiline').forEach(block => hljs.highlightBlock(block));
+        });
+    </script>
+
+    <script>
+        function scrollToMessage(event, id) {
+            var element = document.getElementById('message-' + id);
+
+            if (element) {
+                event.preventDefault();
+
+                element.classList.add('chatlog__message--highlighted');
+
+                window.scrollTo({
+                    top: element.getBoundingClientRect().top - document.body.getBoundingClientRect().top - (window.innerHeight / 2),
+                    behavior: 'smooth'
+                });
+
+                window.setTimeout(function() {
+                    element.classList.remove('chatlog__message--highlighted');
+                }, 2000);
+            }
+        }
+
+        function showSpoiler(event, element) {
+            if (element && element.classList.contains('spoiler-text--hidden')) {
+                event.preventDefault();
+                element.classList.remove('spoiler-text--hidden');
+            }
+            if (element && element.classList.contains('chatlog__attachment--hidden')) {
+                event.preventDefault();
+                element.classList.remove('chatlog__attachment--hidden');
+            }
+        }
+    </script>
+
+    <svg style="display: none">
+        <symbol id="icon-attachment" viewBox="0 0 720 960">
+            <path fill="#f4f5fb" d="M50,935a25,25,0,0,1-25-25V50A25,25,0,0,1,50,25H519.6L695,201.32V910a25,25,0,0,1-25,25Z" />
+            <path fill="#7789c4" d="M509.21,50,670,211.63V910H50V50H509.21M530,0H50A50,50,0,0,0,0,50V910a50,50,0,0,0,50,50H670a50,50,0,0,0,50-50h0V191Z" />
+            <path fill="#f4f5fb" d="M530,215a25,25,0,0,1-25-25V50a25,25,0,0,1,16.23-23.41L693.41,198.77A25,25,0,0,1,670,215Z" />
+            <path fill="#7789c4" d="M530,70.71,649.29,190H530V70.71M530,0a50,50,0,0,0-50,50V190a50,50,0,0,0,50,50H670a50,50,0,0,0,50-50Z" />
+        </symbol>
+    </svg>
+</head>
+<body>
+
+<div class="preamble">
+    <div class="preamble__guild-icon-container">
+        <img class="preamble__guild-icon" src="https://cdn.discordapp.com/icons/742005522093572218/2b672cd2bee3339998a5d16a73bc87c3.png" alt="Guild icon" loading="lazy">
+    </div>
+    <div class="preamble__entries-container">
+        <div class="preamble__entry">&#120445;&#120462;&#120477; &#120450;&#120474;&#120478;&#120458;&#120461;</div>
+        <div class="preamble__entry">Info_Sec [] / infosec-blogs</div>
+
+
+    </div>
+</div>
+
+<div class="chatlog">
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/783110835374653440/8421b38e0647c5e623a7367b251b4b50.png?size=40" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Dazai__#1182" data-user-id="783110835374653440" style="color: rgb(201,30,189)">Dazai__</span>
+
+
+        <span class="chatlog__timestamp">23-May-21 10:08 PM</span>
+
+            <div class="chatlog__message " data-message-id="846132557820854322" id="message-846132557820854322" title="Message sent: 23-May-21 10:08 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><a href="https://offs3cg33k.medium.com/active-directory-attack-phase-ad-fu-6ed5e5ce1985">https://offs3cg33k.medium.com/active-directory-attack-phase-ad-fu-6ed5e5ce1985</a></span>
+
+                        </div>
+                    </div>
+
+
+                        <div class="chatlog__embed">
+                                <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
+
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="https://offs3cg33k.medium.com/active-directory-attack-phase-ad-fu-6ed5e5ce1985">
+                                                        <div class="markdown preserve-whitespace">Active Directory | Attack — Phase | AD-fu</div>
+                                                    </a>
+                                            </div>
+
+                                            <div class="chatlog__embed-description">
+                                                <div class="markdown preserve-whitespace">Yet another very interesting topic to include when we talk about sharing files and services all around the network, is Active Directory. I…</div>
+                                            </div>
+
+                                    </div>
+
+                                        <div class="chatlog__embed-thumbnail-container">
+                                            <a class="chatlog__embed-thumbnail-link" href="https://images-ext-1.discordapp.net/external/ov_N3-hdyGexUZaDirbHt4YruPnxRsOd9hQXXS8k200/https/miro.medium.com/max/502/0%2AcQdelgYskKgYvz1q">
+                                                <img class="chatlog__embed-thumbnail" src="https://images-ext-1.discordapp.net/external/ov_N3-hdyGexUZaDirbHt4YruPnxRsOd9hQXXS8k200/https/miro.medium.com/max/502/0%2AcQdelgYskKgYvz1q" alt="Thumbnail" loading="lazy">
+                                            </a>
+                                        </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+
+                    <div class="chatlog__reactions">
+                            <div class="chatlog__reaction" title="100">
+                                <img class="emoji emoji--small" alt="&#128175;" src="https://twemoji.maxcdn.com/2/svg/1f4af.svg" loading="lazy">
+                                <span class="chatlog__reaction-count">1</span>
+                            </div>
+                    </div>
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/783110835374653440/8421b38e0647c5e623a7367b251b4b50.png?size=40" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Dazai__#1182" data-user-id="783110835374653440" style="color: rgb(201,30,189)">Dazai__</span>
+
+
+        <span class="chatlog__timestamp">26-May-21 11:28 PM</span>
+
+            <div class="chatlog__message " data-message-id="847239896061181962" id="message-847239896061181962" title="Message sent: 26-May-21 11:28 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><a href="https://www.securify.nl/blog/spot-the-bug-challenge-2018-warm-up#spot-the-bug-2018">https://www.securify.nl/blog/spot-the-bug-challenge-2018-warm-up#spot-the-bug-2018</a></span>
+
+                        </div>
+                    </div>
+
+
+                        <div class="chatlog__embed">
+                                <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
+
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="https://www.securify.nl/blog/spot-the-bug-challenge-2018-warm-up">
+                                                        <div class="markdown preserve-whitespace">Spot The Bug challenge 2018 warm-up</div>
+                                                    </a>
+                                            </div>
+
+                                            <div class="chatlog__embed-description">
+                                                <div class="markdown preserve-whitespace">Securify provides reality checks to lower security risks and build up resilience against threats. Agile Security, Pentesting (scenario-based) and Red Teaming.</div>
+                                            </div>
+
+                                    </div>
+
+                                        <div class="chatlog__embed-thumbnail-container">
+                                            <a class="chatlog__embed-thumbnail-link" href="https://images-ext-2.discordapp.net/external/PQx2E-F_Ic_xxBFtyO58FAn6RDTpD1ky87TuDIuzGbY/%3Fw%3D1000%26fit%3Dmax%26fm%3Djpg/https/www.datocms-assets.com/21957/1592478183-card.png">
+                                                <img class="chatlog__embed-thumbnail" src="https://images-ext-2.discordapp.net/external/PQx2E-F_Ic_xxBFtyO58FAn6RDTpD1ky87TuDIuzGbY/%3Fw%3D1000%26fit%3Dmax%26fm%3Djpg/https/www.datocms-assets.com/21957/1592478183-card.png" alt="Thumbnail" loading="lazy">
+                                            </a>
+                                        </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/783110835374653440/8421b38e0647c5e623a7367b251b4b50.png?size=40" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Dazai__#1182" data-user-id="783110835374653440" style="color: rgb(201,30,189)">Dazai__</span>
+
+
+        <span class="chatlog__timestamp">28-May-21 09:55 PM</span>
+
+            <div class="chatlog__message " data-message-id="847941263335358484" id="message-847941263335358484" title="Message sent: 28-May-21 09:55 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><a href="https://www.owasp.org/index.php/Clickjacking">https://www.owasp.org/index.php/Clickjacking</a></span>
+
+                        </div>
+                    </div>
+
+
+                        <div class="chatlog__embed">
+                                <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
+
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+
+
+                                            <div class="chatlog__embed-description">
+                                                <div class="markdown preserve-whitespace">Clickjacking on the main website for The OWASP Foundation. OWASP is a nonprofit foundation that works to improve the security of software.</div>
+                                            </div>
+
+                                    </div>
+
+                                        <div class="chatlog__embed-thumbnail-container">
+                                            <a class="chatlog__embed-thumbnail-link" href="https://images-ext-1.discordapp.net/external/mSN5uItHJihvKkI_9irxnfIN4FdXML-xSqcxjkcq2Eo/https/owasp.org/www--site-theme/favicon.ico">
+                                                <img class="chatlog__embed-thumbnail" src="https://images-ext-1.discordapp.net/external/mSN5uItHJihvKkI_9irxnfIN4FdXML-xSqcxjkcq2Eo/https/owasp.org/www--site-theme/favicon.ico" alt="Thumbnail" loading="lazy">
+                                            </a>
+                                        </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/783110835374653440/8421b38e0647c5e623a7367b251b4b50.png?size=40" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Dazai__#1182" data-user-id="783110835374653440" style="color: rgb(201,30,189)">Dazai__</span>
+
+
+        <span class="chatlog__timestamp">30-May-21 05:38 PM</span>
+
+            <div class="chatlog__message " data-message-id="848601213376528465" id="message-848601213376528465" title="Message sent: 30-May-21 05:38 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><a href="https://nitesculucian.github.io/2019/07/01/exploiting-the-xmlrpc-php-on-all-wordpress-versions/">https://nitesculucian.github.io/2019/07/01/exploiting-the-xmlrpc-php-on-all-wordpress-versions/</a></span>
+
+                        </div>
+                    </div>
+
+
+                        <div class="chatlog__embed">
+                                <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
+
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="https://nitesculucian.github.io/2019/07/01/exploiting-the-xmlrpc-php-on-all-wordpress-versions/">
+                                                        <div class="markdown preserve-whitespace">Exploiting the xmlrpc.php on all WordPress versions</div>
+                                                    </a>
+                                            </div>
+
+
+                                    </div>
+
+                                        <div class="chatlog__embed-thumbnail-container">
+                                            <a class="chatlog__embed-thumbnail-link" href="https://images-ext-2.discordapp.net/external/VrrpnLswB66z6plbecW-01poYGFMvljHr98Y9BSTxR8/https/nitesculucian.github.io/uploads/Screenshot%2520from%25202019-07-02%252002-52-29.png">
+                                                <img class="chatlog__embed-thumbnail" src="https://images-ext-2.discordapp.net/external/VrrpnLswB66z6plbecW-01poYGFMvljHr98Y9BSTxR8/https/nitesculucian.github.io/uploads/Screenshot%2520from%25202019-07-02%252002-52-29.png" alt="Thumbnail" loading="lazy">
+                                            </a>
+                                        </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/783110835374653440/8421b38e0647c5e623a7367b251b4b50.png?size=40" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Dazai__#1182" data-user-id="783110835374653440" style="color: rgb(201,30,189)">Dazai__</span>
+
+
+        <span class="chatlog__timestamp">30-May-21 06:29 PM</span>
+
+            <div class="chatlog__message " data-message-id="848614098156781650" id="message-848614098156781650" title="Message sent: 30-May-21 06:29 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><a href="https://portswigger.net/daily-swig/wordpress-xxe-injection-vulnerability-could-allow-attackers-to-remotely-steal-host-files">https://portswigger.net/daily-swig/wordpress-xxe-injection-vulnerability-could-allow-attackers-to-remotely-steal-host-files</a></span>
+
+                        </div>
+                    </div>
+
+
+                        <div class="chatlog__embed">
+                                <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
+
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="https://portswigger.net/daily-swig/wordpress-xxe-injection-vulnerability-could-allow-attackers-to-remotely-steal-host-files">
+                                                        <div class="markdown preserve-whitespace">WordPress XXE injection vulnerability could allow attackers to remo...</div>
+                                                    </a>
+                                            </div>
+
+                                            <div class="chatlog__embed-description">
+                                                <div class="markdown preserve-whitespace">Researchers provide technical details of bug that was fixed in latest security release</div>
+                                            </div>
+
+                                    </div>
+
+                                        <div class="chatlog__embed-thumbnail-container">
+                                            <a class="chatlog__embed-thumbnail-link" href="https://images-ext-1.discordapp.net/external/Iuc6EqjLvWTprMcJ2q8UXcqFqU2Bk48eGBghvz8OR7g/https/portswigger.net/cms/images/b4/ed/c6c9-twittercard-210427-wordpress-body-text.png">
+                                                <img class="chatlog__embed-thumbnail" src="https://images-ext-1.discordapp.net/external/Iuc6EqjLvWTprMcJ2q8UXcqFqU2Bk48eGBghvz8OR7g/https/portswigger.net/cms/images/b4/ed/c6c9-twittercard-210427-wordpress-body-text.png" alt="Thumbnail" loading="lazy">
+                                            </a>
+                                        </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/783110835374653440/8421b38e0647c5e623a7367b251b4b50.png?size=40" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Dazai__#1182" data-user-id="783110835374653440" style="color: rgb(201,30,189)">Dazai__</span>
+
+
+        <span class="chatlog__timestamp">01-Jun-21 10:49 PM</span>
+
+            <div class="chatlog__message " data-message-id="849404262949191730" id="message-849404262949191730" title="Message sent: 01-Jun-21 10:49 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><a href="https://mrsinister1501.medium.com/how-i-found-cross-site-scripting-reflected-on-more-than-300-systems-81d8118d9de5">https://mrsinister1501.medium.com/how-i-found-cross-site-scripting-reflected-on-more-than-300-systems-81d8118d9de5</a></span>
+
+                        </div>
+                    </div>
+
+
+                        <div class="chatlog__embed">
+                                <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
+
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="https://mrsinister1501.medium.com/how-i-found-cross-site-scripting-reflected-on-more-than-300-systems-81d8118d9de5">
+                                                        <div class="markdown preserve-whitespace">How I found Cross-Site-Scripting (Reflected) on more than 300 systems!</div>
+                                                    </a>
+                                            </div>
+
+                                            <div class="chatlog__embed-description">
+                                                <div class="markdown preserve-whitespace">Hey everyone, welcome to my second write-up.
+If you didn’t read my first, you can find it…</div>
+                                            </div>
+
+                                    </div>
+
+                                        <div class="chatlog__embed-thumbnail-container">
+                                            <a class="chatlog__embed-thumbnail-link" href="https://images-ext-2.discordapp.net/external/T56kyzOxM7mUFPNEGtv8Nfny6Bzp5Rm1MWDak9QG4gM/https/miro.medium.com/max/645/1%2AdEZrFmxCpAq_MwkcwyXPnA.png">
+                                                <img class="chatlog__embed-thumbnail" src="https://images-ext-2.discordapp.net/external/T56kyzOxM7mUFPNEGtv8Nfny6Bzp5Rm1MWDak9QG4gM/https/miro.medium.com/max/645/1%2AdEZrFmxCpAq_MwkcwyXPnA.png" alt="Thumbnail" loading="lazy">
+                                            </a>
+                                        </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+
+            </div>
+            <div class="chatlog__message " data-message-id="849404361376923698" id="message-849404361376923698" title="Message sent: 01-Jun-21 10:49 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><a href="https://mrsinister1501.medium.com/my-bug-bounty-hunting-journey-methodology-and-tips-xd-790d8deb6247">https://mrsinister1501.medium.com/my-bug-bounty-hunting-journey-methodology-and-tips-xd-790d8deb6247</a></span>
+
+                        </div>
+                    </div>
+
+
+                        <div class="chatlog__embed">
+                                <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
+
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="https://mrsinister1501.medium.com/my-bug-bounty-hunting-journey-methodology-and-tips-xd-790d8deb6247">
+                                                        <div class="markdown preserve-whitespace">My Bug Bounty Hunting Journey, Methodology and Tips XD</div>
+                                                    </a>
+                                            </div>
+
+                                            <div class="chatlog__embed-description">
+                                                <div class="markdown preserve-whitespace">This is Basically my journey in 4 months of Bug hunting!</div>
+                                            </div>
+
+                                    </div>
+
+                                        <div class="chatlog__embed-thumbnail-container">
+                                            <a class="chatlog__embed-thumbnail-link" href="https://images-ext-1.discordapp.net/external/-HFXagQCipg5iVyFnCuVxb32WsVZPGtIyRgSg9wgMpg/https/miro.medium.com/max/800/0%2A4pkAqgVDH4IA5CGV.png">
+                                                <img class="chatlog__embed-thumbnail" src="https://images-ext-1.discordapp.net/external/-HFXagQCipg5iVyFnCuVxb32WsVZPGtIyRgSg9wgMpg/https/miro.medium.com/max/800/0%2A4pkAqgVDH4IA5CGV.png" alt="Thumbnail" loading="lazy">
+                                            </a>
+                                        </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+
+                    <div class="chatlog__reactions">
+                            <div class="chatlog__reaction" title="5394_knowledge">
+                                <img class="emoji emoji--small" alt="5394_knowledge" src="https://cdn.discordapp.com/emojis/802975435122147340.png" loading="lazy">
+                                <span class="chatlog__reaction-count">1</span>
+                            </div>
+                    </div>
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/783110835374653440/8421b38e0647c5e623a7367b251b4b50.png?size=40" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Dazai__#1182" data-user-id="783110835374653440" style="color: rgb(201,30,189)">Dazai__</span>
+
+
+        <span class="chatlog__timestamp">02-Jun-21 05:55 PM</span>
+
+            <div class="chatlog__message " data-message-id="849692732611362916" id="message-849692732611362916" title="Message sent: 02-Jun-21 05:55 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><a href="https://smaranchand.com.np/2020/04/misconfigured-wordpress-takeover-to-remote-code-execution/">https://smaranchand.com.np/2020/04/misconfigured-wordpress-takeover-to-remote-code-execution/</a></span>
+
+                        </div>
+                    </div>
+
+
+                        <div class="chatlog__embed">
+                                <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
+
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+                                            <div class="chatlog__embed-author">
+
+                                                    <span class="chatlog__embed-author-name">
+                                                            <a class="chatlog__embed-author-name-link" href="https://smaranchand.com.np/author/smaran-chand/">smaran.chand</a>
+                                                    </span>
+                                            </div>
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="https://smaranchand.com.np/2020/04/misconfigured-wordpress-takeover-to-remote-code-execution/">
+                                                        <div class="markdown preserve-whitespace">Misconfigured WordPress takeover to Remote Code Execution</div>
+                                                    </a>
+                                            </div>
+
+                                            <div class="chatlog__embed-description">
+                                                <div class="markdown preserve-whitespace">Hello Everyone, I hope you guys are doing well. I am sharing a recent issue which I discovered today only. And this is the most instant write-up I have ever published. In summary, I ended up with R…</div>
+                                            </div>
+
+                                    </div>
+
+                                        <div class="chatlog__embed-thumbnail-container">
+                                            <a class="chatlog__embed-thumbnail-link" href="https://images-ext-1.discordapp.net/external/mjiSb99DoUDbNzsGH4ynAQuLX-qdoZ7OyNjOgMudV2k/https/smaranchand.com.np/wp-content/uploads/2020/04/wp_setup_misconfig.png">
+                                                <img class="chatlog__embed-thumbnail" src="https://images-ext-1.discordapp.net/external/mjiSb99DoUDbNzsGH4ynAQuLX-qdoZ7OyNjOgMudV2k/https/smaranchand.com.np/wp-content/uploads/2020/04/wp_setup_misconfig.png" alt="Thumbnail" loading="lazy">
+                                            </a>
+                                        </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/783110835374653440/8421b38e0647c5e623a7367b251b4b50.png?size=40" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Dazai__#1182" data-user-id="783110835374653440" style="color: rgb(201,30,189)">Dazai__</span>
+
+
+        <span class="chatlog__timestamp">03-Jun-21 11:34 AM</span>
+
+            <div class="chatlog__message " data-message-id="849959178591928320" id="message-849959178591928320" title="Message sent: 03-Jun-21 11:34 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><a href="https://flast101.github.io/php-8.1.0-dev-backdoor-rce/">https://flast101.github.io/php-8.1.0-dev-backdoor-rce/</a></span>
+
+                        </div>
+                    </div>
+
+
+                        <div class="chatlog__embed">
+                                <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
+
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="https://flast101.github.io/php-8.1.0-dev-backdoor-rce/">
+                                                        <div class="markdown preserve-whitespace">php-8.1.0-dev-backdoor-rce</div>
+                                                    </a>
+                                            </div>
+
+                                            <div class="chatlog__embed-description">
+                                                <div class="markdown preserve-whitespace">PHP 8.1.0-dev Backdoor System Shell Script</div>
+                                            </div>
+
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+                        </div>
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/783110835374653440/8421b38e0647c5e623a7367b251b4b50.png?size=40" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Dazai__#1182" data-user-id="783110835374653440" style="color: rgb(201,30,189)">Dazai__</span>
+
+
+        <span class="chatlog__timestamp">06-Jun-21 11:12 AM</span>
+
+            <div class="chatlog__message " data-message-id="851040812850610176" id="message-851040812850610176" title="Message sent: 06-Jun-21 11:12 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><a href="https://notifybugme.medium.com/how-github-recon-help-me-to-find-nine-full-ssrf-vulnerability-with-aws-metadata-access-531d931413a5">https://notifybugme.medium.com/how-github-recon-help-me-to-find-nine-full-ssrf-vulnerability-with-aws-metadata-access-531d931413a5</a></span>
+
+                        </div>
+                    </div>
+
+
+                        <div class="chatlog__embed">
+                                <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
+
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="https://notifybugme.medium.com/how-github-recon-help-me-to-find-nine-full-ssrf-vulnerability-with-aws-metadata-access-531d931413a5">
+                                                        <div class="markdown preserve-whitespace">How Github recon help me to find NINE FULL SSRF Vulnerability with ...</div>
+                                                    </a>
+                                            </div>
+
+                                            <div class="chatlog__embed-description">
+                                                <div class="markdown preserve-whitespace">Hi, everyone</div>
+                                            </div>
+
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+                        </div>
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/783110835374653440/8421b38e0647c5e623a7367b251b4b50.png?size=40" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Dazai__#1182" data-user-id="783110835374653440" style="color: rgb(201,30,189)">Dazai__</span>
+
+
+        <span class="chatlog__timestamp">07-Jun-21 08:51 PM</span>
+
+            <div class="chatlog__message " data-message-id="851548854582771769" id="message-851548854582771769" title="Message sent: 07-Jun-21 08:51 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><a href="https://sivasankar.org/2018/703/its-easy-netscaler-12-step-by-step-guides/#NetScaler_Basics_for_beginners">https://sivasankar.org/2018/703/its-easy-netscaler-12-step-by-step-guides/#NetScaler_Basics_for_beginners</a></span>
+
+                        </div>
+                    </div>
+
+
+                        <div class="chatlog__embed">
+                                <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
+
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+                                            <div class="chatlog__embed-author">
+
+                                                    <span class="chatlog__embed-author-name">
+                                                            <a class="chatlog__embed-author-name-link" href="https://sivasankar.org/author/admin/">Siva Sankar</a>
+                                                    </span>
+                                            </div>
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="https://sivasankar.org/2018/703/its-easy-netscaler-12-step-by-step-guides/">
+                                                        <div class="markdown preserve-whitespace">Its Easy – NetScaler 12 Step by Step Installation and Configuration...</div>
+                                                    </a>
+                                            </div>
+
+
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+                        </div>
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/783110835374653440/8421b38e0647c5e623a7367b251b4b50.png?size=40" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Dazai__#1182" data-user-id="783110835374653440" style="color: rgb(201,30,189)">Dazai__</span>
+
+
+        <span class="chatlog__timestamp">09-Jun-21 12:14 AM</span>
+
+            <div class="chatlog__message " data-message-id="851962302004854804" id="message-851962302004854804" title="Message sent: 09-Jun-21 12:14 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><a href="https://hakluke.medium.com/upgrade-xss-from-medium-to-critical-cb96597b6cc4">https://hakluke.medium.com/upgrade-xss-from-medium-to-critical-cb96597b6cc4</a></span>
+
+                        </div>
+                    </div>
+
+
+                        <div class="chatlog__embed">
+                                <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
+
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="https://hakluke.medium.com/upgrade-xss-from-medium-to-critical-cb96597b6cc4">
+                                                        <div class="markdown preserve-whitespace">How to Upgrade Your XSS Bug from Medium to Critical</div>
+                                                    </a>
+                                            </div>
+
+                                            <div class="chatlog__embed-description">
+                                                <div class="markdown preserve-whitespace">Some ways to effectively leverage XSS vulnerabilities to increase severity, and some canned payloads to hack popular frameworks!</div>
+                                            </div>
+
+                                    </div>
+
+                                        <div class="chatlog__embed-thumbnail-container">
+                                            <a class="chatlog__embed-thumbnail-link" href="https://images-ext-1.discordapp.net/external/5tH2oal11Zq-0jpLM4es2aPe8Xc3xY3BZLlx6N9Rp1w/https/miro.medium.com/max/1200/0%2Ap3VyNlqPDQaY-EkC">
+                                                <img class="chatlog__embed-thumbnail" src="https://images-ext-1.discordapp.net/external/5tH2oal11Zq-0jpLM4es2aPe8Xc3xY3BZLlx6N9Rp1w/https/miro.medium.com/max/1200/0%2Ap3VyNlqPDQaY-EkC" alt="Thumbnail" loading="lazy">
+                                            </a>
+                                        </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/783110835374653440/8421b38e0647c5e623a7367b251b4b50.png?size=40" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Dazai__#1182" data-user-id="783110835374653440" style="color: rgb(201,30,189)">Dazai__</span>
+
+
+        <span class="chatlog__timestamp">10-Jun-21 01:09 PM</span>
+
+            <div class="chatlog__message " data-message-id="852519937204682762" id="message-852519937204682762" title="Message sent: 10-Jun-21 01:09 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><a href="https://mikey96.medium.com/cloud-based-storage-misconfigurations-critical-bounties-361647f78a29">https://mikey96.medium.com/cloud-based-storage-misconfigurations-critical-bounties-361647f78a29</a></span>
+
+                        </div>
+                    </div>
+
+
+                        <div class="chatlog__embed">
+                                <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
+
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="https://mikey96.medium.com/cloud-based-storage-misconfigurations-critical-bounties-361647f78a29">
+                                                        <div class="markdown preserve-whitespace">Cloud Based Storage Misconfigurations -&gt; Critical Bounties</div>
+                                                    </a>
+                                            </div>
+
+                                            <div class="chatlog__embed-description">
+                                                <div class="markdown preserve-whitespace">I started looking into cloud-based storage around about a year and a half ago with a friend. I was instantly fascinated with the process…</div>
+                                            </div>
+
+                                    </div>
+
+                                        <div class="chatlog__embed-thumbnail-container">
+                                            <a class="chatlog__embed-thumbnail-link" href="https://images-ext-2.discordapp.net/external/Wg9Iv7uiHOwtRSulHWIlCdglnhg8nzBaH2njSMHSjk0/https/miro.medium.com/max/1029/1%2A005dw-GzU8Rfr0UhvL-rEg.png">
+                                                <img class="chatlog__embed-thumbnail" src="https://images-ext-2.discordapp.net/external/Wg9Iv7uiHOwtRSulHWIlCdglnhg8nzBaH2njSMHSjk0/https/miro.medium.com/max/1029/1%2A005dw-GzU8Rfr0UhvL-rEg.png" alt="Thumbnail" loading="lazy">
+                                            </a>
+                                        </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/783110835374653440/8421b38e0647c5e623a7367b251b4b50.png?size=40" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Dazai__#1182" data-user-id="783110835374653440" style="color: rgb(201,30,189)">Dazai__</span>
+
+
+        <span class="chatlog__timestamp">10-Jun-21 08:20 PM</span>
+
+            <div class="chatlog__message " data-message-id="852628391974010932" id="message-852628391974010932" title="Message sent: 10-Jun-21 08:20 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><a href="https://blog.intigriti.com/2021/03/17/bug-bytes-114-binary-fuzzing-for-web-vulnerabilities-leaky-page-nahamcon2021/">https://blog.intigriti.com/2021/03/17/bug-bytes-114-binary-fuzzing-for-web-vulnerabilities-leaky-page-nahamcon2021/</a></span>
+
+                        </div>
+                    </div>
+
+
+                        <div class="chatlog__embed">
+                                <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
+
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="https://blog.intigriti.com/2021/03/17/bug-bytes-114-binary-fuzzing-for-web-vulnerabilities-leaky-page-nahamcon2021/">
+                                                        <div class="markdown preserve-whitespace">Bug Bytes #114 - Binary fuzzing for Web vulnerabilities, Leaky page...</div>
+                                                    </a>
+                                            </div>
+
+                                            <div class="chatlog__embed-description">
+                                                <div class="markdown preserve-whitespace">Bug Bytes is a weekly newsletter curated by members of the bug bounty community. The first series is curated by Mariem, better known as PentesterLand. Every week, she keeps us up to date with a comprehensive list of write-ups, tools, tutorials and resources. This issue covers the week from March 8 to 15. Intigriti News […]</div>
+                                            </div>
+
+                                    </div>
+
+                                        <div class="chatlog__embed-thumbnail-container">
+                                            <a class="chatlog__embed-thumbnail-link" href="https://images-ext-1.discordapp.net/external/JrlSXyNCghX0cWoZda8Uh77woBdR1Yzwzp0KSp1TM8s/https/blog.intigriti.com/wp-content/uploads/2021/03/i113.png">
+                                                <img class="chatlog__embed-thumbnail" src="https://images-ext-1.discordapp.net/external/JrlSXyNCghX0cWoZda8Uh77woBdR1Yzwzp0KSp1TM8s/https/blog.intigriti.com/wp-content/uploads/2021/03/i113.png" alt="Thumbnail" loading="lazy">
+                                            </a>
+                                        </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+        <div class="chatlog__reference-symbol"></div>
+        <div class="chatlog__reference">
+                <img class="chatlog__reference-avatar" src="https://cdn.discordapp.com/avatars/783110835374653440/8421b38e0647c5e623a7367b251b4b50.png?size=40" alt="Avatar" loading="lazy">
+                <span class="chatlog__reference-name" title="Dazai__#1182" style="color: rgb(201,30,189)">Dazai__</span>
+                <div class="chatlog__reference-content">
+                    <span class="chatlog__reference-link" onclick="scrollToMessage(event, &#39;852628391974010932&#39;)">
+<a href="https://blog.intigriti.com/2021/03/17/bug-bytes-114-binary-fuzzing-for-web-vulnerabilities-leaky-page-nahamcon2021/">https://blog.intigriti.com/2021/03/17/bug-bytes-114-binary-fuzzing-for-web-vulnerabilities-leaky-page-nahamcon2021/</a>                    </span>
+
+                </div>
+        </div>
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/783110835374653440/8421b38e0647c5e623a7367b251b4b50.png?size=40" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Dazai__#1182" data-user-id="783110835374653440" style="color: rgb(201,30,189)">Dazai__</span>
+
+
+        <span class="chatlog__timestamp">10-Jun-21 08:21 PM</span>
+
+            <div class="chatlog__message " data-message-id="852628479668125727" id="message-852628479668125727" title="Message sent: 10-Jun-21 08:21 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><span class="mention" title="Mr.echo#4180">@Mr.echo</span> Top 5 blogs</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+        <div class="chatlog__reference-symbol"></div>
+        <div class="chatlog__reference">
+                <img class="chatlog__reference-avatar" src="https://cdn.discordapp.com/avatars/783110835374653440/8421b38e0647c5e623a7367b251b4b50.png?size=40" alt="Avatar" loading="lazy">
+                <span class="chatlog__reference-name" title="Dazai__#1182" style="color: rgb(201,30,189)">Dazai__</span>
+                <div class="chatlog__reference-content">
+                    <span class="chatlog__reference-link" onclick="scrollToMessage(event, &#39;852628479668125727&#39;)">
+<span class="mention" title="Mr.echo#4180">@Mr.echo</span> Top 5 blogs                    </span>
+
+                </div>
+        </div>
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/738370374366134302/3b9bf962b7b238668576f56b04b35128.png?size=40" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Mr.echo#4180" data-user-id="738370374366134302" style="color: rgb(201,30,189)">Mr.echo</span>
+
+
+        <span class="chatlog__timestamp">10-Jun-21 09:57 PM</span>
+
+            <div class="chatlog__message " data-message-id="852652765322018896" id="message-852652765322018896" title="Message sent: 10-Jun-21 09:57 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">sheesh <img loading="lazy" class="emoji " alt="kitty_wave" title="kitty_wave" src="https://cdn.discordapp.com/emojis/802973500490907699.png"></span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/783110835374653440/8421b38e0647c5e623a7367b251b4b50.png?size=40" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Dazai__#1182" data-user-id="783110835374653440" style="color: rgb(201,30,189)">Dazai__</span>
+
+
+        <span class="chatlog__timestamp">14-Jun-21 02:03 PM</span>
+
+            <div class="chatlog__message " data-message-id="853982927323267083" id="message-853982927323267083" title="Message sent: 14-Jun-21 02:03 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><a href="https://medium.com/@thebuckhacker/how-to-do-55-000-subdomain-takeover-in-a-blink-of-an-eye-a94954c3fc75">https://medium.com/@thebuckhacker/how-to-do-55-000-subdomain-takeover-in-a-blink-of-an-eye-a94954c3fc75</a></span>
+
+                        </div>
+                    </div>
+
+
+                        <div class="chatlog__embed">
+                                <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
+
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="https://medium.com/@thebuckhacker/how-to-do-55-000-subdomain-takeover-in-a-blink-of-an-eye-a94954c3fc75">
+                                                        <div class="markdown preserve-whitespace">How to do 55.000+ Subdomain Takeover in a Blink of an Eye</div>
+                                                    </a>
+                                            </div>
+
+                                            <div class="chatlog__embed-description">
+                                                <div class="markdown preserve-whitespace">TL;DR In this article we will describe a process that allowed us to identify more then 55.000 subdomains vulnerable to Subdomain Takeover…</div>
+                                            </div>
+
+                                    </div>
+
+                                        <div class="chatlog__embed-thumbnail-container">
+                                            <a class="chatlog__embed-thumbnail-link" href="https://images-ext-1.discordapp.net/external/isXvx_G6NZUFE9dRBVMJw2Z682N4Agf_v1TJh8RLA8Q/https/miro.medium.com/max/1138/1%2A3Zo68HP4znV2MuLSBmnx8w.png">
+                                                <img class="chatlog__embed-thumbnail" src="https://images-ext-1.discordapp.net/external/isXvx_G6NZUFE9dRBVMJw2Z682N4Agf_v1TJh8RLA8Q/https/miro.medium.com/max/1138/1%2A3Zo68HP4znV2MuLSBmnx8w.png" alt="Thumbnail" loading="lazy">
+                                            </a>
+                                        </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/783110835374653440/8421b38e0647c5e623a7367b251b4b50.png?size=40" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Dazai__#1182" data-user-id="783110835374653440" style="color: rgb(201,30,189)">Dazai__</span>
+
+
+        <span class="chatlog__timestamp">14-Jun-21 11:51 PM</span>
+
+            <div class="chatlog__message " data-message-id="854130938908770344" id="message-854130938908770344" title="Message sent: 14-Jun-21 11:51 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><a href="https://infosecwriteups.com/api-hacking-secrets-part-3-3872f98eff73">https://infosecwriteups.com/api-hacking-secrets-part-3-3872f98eff73</a></span>
+
+                        </div>
+                    </div>
+
+
+                        <div class="chatlog__embed">
+                                <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
+
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="https://infosecwriteups.com/api-hacking-secrets-part-3-3872f98eff73">
+                                                        <div class="markdown preserve-whitespace">API HACKING SECRETS PART 3</div>
+                                                    </a>
+                                            </div>
+
+                                            <div class="chatlog__embed-description">
+                                                <div class="markdown preserve-whitespace">parsing the WSDL file to extract ENDPOINTS</div>
+                                            </div>
+
+                                    </div>
+
+                                        <div class="chatlog__embed-thumbnail-container">
+                                            <a class="chatlog__embed-thumbnail-link" href="https://images-ext-1.discordapp.net/external/bp01ehpWhE9t_HXvnH4OWByB2YyE8aaHZ2CB8Wcr5yI/https/miro.medium.com/max/940/1%2AJ1U-w7jr71BE45qmr1SzQA.png">
+                                                <img class="chatlog__embed-thumbnail" src="https://images-ext-1.discordapp.net/external/bp01ehpWhE9t_HXvnH4OWByB2YyE8aaHZ2CB8Wcr5yI/https/miro.medium.com/max/940/1%2AJ1U-w7jr71BE45qmr1SzQA.png" alt="Thumbnail" loading="lazy">
+                                            </a>
+                                        </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/783110835374653440/8421b38e0647c5e623a7367b251b4b50.png?size=40" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Dazai__#1182" data-user-id="783110835374653440" style="color: rgb(201,30,189)">Dazai__</span>
+
+
+        <span class="chatlog__timestamp">18-Jun-21 05:24 PM</span>
+
+            <div class="chatlog__message " data-message-id="855483015814709300" id="message-855483015814709300" title="Message sent: 18-Jun-21 05:24 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><a href="https://medium.com/cyberverse/authentication-bypass-with-x-path-injection-and-sql-injection-cyberverse-c5d8dd34ac9a">https://medium.com/cyberverse/authentication-bypass-with-x-path-injection-and-sql-injection-cyberverse-c5d8dd34ac9a</a></span>
+
+                        </div>
+                    </div>
+
+
+                        <div class="chatlog__embed">
+                                <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
+
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="https://medium.com/cyberverse/authentication-bypass-with-x-path-injection-and-sql-injection-cyberverse-c5d8dd34ac9a">
+                                                        <div class="markdown preserve-whitespace">Authentication Bypass — With X Path injection and SQL injection | C...</div>
+                                                    </a>
+                                            </div>
+
+                                            <div class="chatlog__embed-description">
+                                                <div class="markdown preserve-whitespace">Authentication Bypass for sites and web applications is unauthorized access to the administrative section or sections of the site and…</div>
+                                            </div>
+
+                                    </div>
+
+                                        <div class="chatlog__embed-thumbnail-container">
+                                            <a class="chatlog__embed-thumbnail-link" href="https://images-ext-1.discordapp.net/external/9NRp15T609AOdx_xQ1FzLVZzaojUxl8aLDX0AWCc6os/https/miro.medium.com/max/1024/1%2Ay_yowPD2v2wjR-nVoid_LA.jpeg">
+                                                <img class="chatlog__embed-thumbnail" src="https://images-ext-1.discordapp.net/external/9NRp15T609AOdx_xQ1FzLVZzaojUxl8aLDX0AWCc6os/https/miro.medium.com/max/1024/1%2Ay_yowPD2v2wjR-nVoid_LA.jpeg" alt="Thumbnail" loading="lazy">
+                                            </a>
+                                        </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/783110835374653440/8421b38e0647c5e623a7367b251b4b50.png?size=40" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Dazai__#1182" data-user-id="783110835374653440" style="color: rgb(201,30,189)">Dazai__</span>
+
+
+        <span class="chatlog__timestamp">19-Jun-21 02:28 AM</span>
+
+            <div class="chatlog__message " data-message-id="855619928139497512" id="message-855619928139497512" title="Message sent: 19-Jun-21 02:28 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><a href="https://book.hacktricks.xyz/pentesting-web/xxe-xee-xml-external-entity">https://book.hacktricks.xyz/pentesting-web/xxe-xee-xml-external-entity</a></span>
+
+                        </div>
+                    </div>
+
+
+                        <div class="chatlog__embed">
+                                <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
+
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="https://book.hacktricks.xyz/pentesting-web/xxe-xee-xml-external-entity">
+                                                        <div class="markdown preserve-whitespace">XXE - XEE - XML External Entity</div>
+                                                    </a>
+                                            </div>
+
+
+                                    </div>
+
+                                        <div class="chatlog__embed-thumbnail-container">
+                                            <a class="chatlog__embed-thumbnail-link" href="https://images-ext-1.discordapp.net/external/VzUJV5aN0u-_ewz4DOSGqv8op1LR6v1bIxcCVrKEzjE/https/app.gitbook.com/share/space/thumbnail/-L_2uGJGU7AVNRcqRvEi.png">
+                                                <img class="chatlog__embed-thumbnail" src="https://images-ext-1.discordapp.net/external/VzUJV5aN0u-_ewz4DOSGqv8op1LR6v1bIxcCVrKEzjE/https/app.gitbook.com/share/space/thumbnail/-L_2uGJGU7AVNRcqRvEi.png" alt="Thumbnail" loading="lazy">
+                                            </a>
+                                        </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/738370374366134302/3b9bf962b7b238668576f56b04b35128.png?size=40" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Mr.echo#4180" data-user-id="738370374366134302" style="color: rgb(201,30,189)">Mr.echo</span>
+
+
+        <span class="chatlog__timestamp">19-Jun-21 03:03 AM</span>
+
+            <div class="chatlog__message " data-message-id="855628740678909952" id="message-855628740678909952" title="Message sent: 19-Jun-21 03:03 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><a href="https://www.youtube.com/watch?v=Hp7Pvppmgqs">https://www.youtube.com/watch?v=Hp7Pvppmgqs</a></span>
+
+                        </div>
+                    </div>
+
+
+                        <div class="chatlog__embed">
+                                <div class="chatlog__embed-color-pill" style="background-color: rgba(255,0,0,255)"></div>
+
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+                                            <div class="chatlog__embed-author">
+
+                                                    <span class="chatlog__embed-author-name">
+                                                            <a class="chatlog__embed-author-name-link" href="https://www.youtube.com/channel/UCtFLdRvI5qEQPwqsmzqLzRw">Wyng</a>
+                                                    </span>
+                                            </div>
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="https://www.youtube.com/watch?v=Hp7Pvppmgqs">
+                                                        <div class="markdown preserve-whitespace">YAMETE KUDASAI</div>
+                                                    </a>
+                                            </div>
+
+                                        <div class="chatlog__embed-youtube-container">
+                                            <iframe class="chatlog__embed-youtube" src="https://www.youtube.com/embed/Hp7Pvppmgqs" width="400" height="225"></iframe>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/783110835374653440/8421b38e0647c5e623a7367b251b4b50.png?size=40" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Dazai__#1182" data-user-id="783110835374653440" style="color: rgb(201,30,189)">Dazai__</span>
+
+
+        <span class="chatlog__timestamp">19-Jun-21 08:37 PM</span>
+
+            <div class="chatlog__message " data-message-id="855894079861817344" id="message-855894079861817344" title="Message sent: 19-Jun-21 08:37 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><a href="http://ghostlulz.com/content-security-policy-csp-bypasses/">http://ghostlulz.com/content-security-policy-csp-bypasses/</a></span>
+
+                        </div>
+                    </div>
+
+
+                        <div class="chatlog__embed">
+                                <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
+
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+                                            <div class="chatlog__embed-author">
+
+                                                    <span class="chatlog__embed-author-name">
+                                                            <a class="chatlog__embed-author-name-link" href="http://ghostlulz.com/author/ghostlulz/">ghostlulz</a>
+                                                    </span>
+                                            </div>
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="http://ghostlulz.com/content-security-policy-csp-bypasses/">
+                                                        <div class="markdown preserve-whitespace">Content Security Policy (CSP) Bypasses - Ghostlulz Hacks</div>
+                                                    </a>
+                                            </div>
+
+                                            <div class="chatlog__embed-description">
+                                                <div class="markdown preserve-whitespace">Bypass the content security policy (CSP) via JSONP endpoints, CSP injection, wildcards *, and other misconfigurations.</div>
+                                            </div>
+
+                                    </div>
+
+                                        <div class="chatlog__embed-thumbnail-container">
+                                            <a class="chatlog__embed-thumbnail-link" href="https://images-ext-1.discordapp.net/external/ovxDS6otevFJYiN3aeI2E000BRCNN4LuvIEBDDwtSbA/https/secureservercdn.net/198.71.233.229/1j8.930.myftpupload.com/wp-content/uploads/2020/02/Screen-Shot-2020-02-07-at-12.04.00-PM-1024x322.png">
+                                                <img class="chatlog__embed-thumbnail" src="https://images-ext-1.discordapp.net/external/ovxDS6otevFJYiN3aeI2E000BRCNN4LuvIEBDDwtSbA/https/secureservercdn.net/198.71.233.229/1j8.930.myftpupload.com/wp-content/uploads/2020/02/Screen-Shot-2020-02-07-at-12.04.00-PM-1024x322.png" alt="Thumbnail" loading="lazy">
+                                            </a>
+                                        </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/738370374366134302/3b9bf962b7b238668576f56b04b35128.png?size=40" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Mr.echo#4180" data-user-id="738370374366134302" style="color: rgb(201,30,189)">Mr.echo</span>
+
+
+        <span class="chatlog__timestamp">20-Jun-21 06:02 PM</span>
+
+            <div class="chatlog__message " data-message-id="856217436835807272" id="message-856217436835807272" title="Message sent: 20-Jun-21 06:02 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><a href="https://www.gnucitizen.org/blog/coldfusion-directory-traversal-faq-cve-2010-2861/">https://www.gnucitizen.org/blog/coldfusion-directory-traversal-faq-cve-2010-2861/</a></span>
+
+                        </div>
+                    </div>
+
+
+                        <div class="chatlog__embed">
+                                <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
+
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="https://www.gnucitizen.org/blog/coldfusion-directory-traversal-faq-cve-2010-2861/">
+                                                        <div class="markdown preserve-whitespace">ColdFusion directory traversal FAQ (CVE-2010-2861)</div>
+                                                    </a>
+                                            </div>
+
+                                            <div class="chatlog__embed-description">
+                                                <div class="markdown preserve-whitespace">A new Adobe hotfix for ColdFusion has been released recently. The vulnerability which was discovered by Richard Brain, was rated as important by Adobe and could affect a large number of Internet-facing web servers. The FAQ bellow is meant to shed some light on this vulnerability so that ColdFusion administrators can understand what they&#39;re up ag...</div>
+                                            </div>
+
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+                        </div>
+
+                    <div class="chatlog__reactions">
+                            <div class="chatlog__reaction" title="sharingan">
+                                <img class="emoji emoji--small" alt="sharingan" src="https://cdn.discordapp.com/emojis/802975014517080104.png" loading="lazy">
+                                <span class="chatlog__reaction-count">1</span>
+                            </div>
+                    </div>
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/738370374366134302/3b9bf962b7b238668576f56b04b35128.png?size=40" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Mr.echo#4180" data-user-id="738370374366134302" style="color: rgb(201,30,189)">Mr.echo</span>
+
+
+        <span class="chatlog__timestamp">20-Jun-21 07:03 PM</span>
+
+            <div class="chatlog__message " data-message-id="856232781851787297" id="message-856232781851787297" title="Message sent: 20-Jun-21 07:03 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><a href="https://github.com/shieldfy/API-Security-Checklist">https://github.com/shieldfy/API-Security-Checklist</a></span>
+
+                        </div>
+                    </div>
+
+
+                        <div class="chatlog__embed">
+                                <div class="chatlog__embed-color-pill" style="background-color: rgba(30,35,39,255)"></div>
+
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="https://github.com/shieldfy/API-Security-Checklist">
+                                                        <div class="markdown preserve-whitespace">shieldfy/API-Security-Checklist</div>
+                                                    </a>
+                                            </div>
+
+                                            <div class="chatlog__embed-description">
+                                                <div class="markdown preserve-whitespace">Checklist of the most important security countermeasures when designing, testing, and releasing your API - shieldfy/API-Security-Checklist</div>
+                                            </div>
+
+                                    </div>
+
+                                        <div class="chatlog__embed-thumbnail-container">
+                                            <a class="chatlog__embed-thumbnail-link" href="https://images-ext-2.discordapp.net/external/Np1DnMDUG34P9KqrXOb24DeouyDLcrGN2KNJgS_rDLE/https/opengraph.githubassets.com/4d362046126e0fe716ce3fb31e4b44ce7bf82032e946a003de5d9d7e71772b1f/shieldfy/API-Security-Checklist">
+                                                <img class="chatlog__embed-thumbnail" src="https://images-ext-2.discordapp.net/external/Np1DnMDUG34P9KqrXOb24DeouyDLcrGN2KNJgS_rDLE/https/opengraph.githubassets.com/4d362046126e0fe716ce3fb31e4b44ce7bf82032e946a003de5d9d7e71772b1f/shieldfy/API-Security-Checklist" alt="Thumbnail" loading="lazy">
+                                            </a>
+                                        </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/783110835374653440/8421b38e0647c5e623a7367b251b4b50.png?size=40" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Dazai__#1182" data-user-id="783110835374653440" style="color: rgb(201,30,189)">Dazai__</span>
+
+
+        <span class="chatlog__timestamp">27-Jun-21 06:47 PM</span>
+
+            <div class="chatlog__message " data-message-id="858765558208135199" id="message-858765558208135199" title="Message sent: 27-Jun-21 06:47 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><a href="https://medium.com/@jonathanbouman/blind-sql-injection-at-fasteditor-hema-com-6ac140c0d1a3">https://medium.com/@jonathanbouman/blind-sql-injection-at-fasteditor-hema-com-6ac140c0d1a3</a></span>
+
+                        </div>
+                    </div>
+
+
+                        <div class="chatlog__embed">
+                                <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
+
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="https://medium.com/@jonathanbouman/blind-sql-injection-at-fasteditor-hema-com-6ac140c0d1a3">
+                                                        <div class="markdown preserve-whitespace">Blind SQL Injection at fasteditor.hema.com</div>
+                                                    </a>
+                                            </div>
+
+                                            <div class="chatlog__embed-description">
+                                                <div class="markdown preserve-whitespace">A full write-up that explains the discovery and exploitation of a blind SQL injection bug.</div>
+                                            </div>
+
+                                    </div>
+
+                                        <div class="chatlog__embed-thumbnail-container">
+                                            <a class="chatlog__embed-thumbnail-link" href="https://images-ext-2.discordapp.net/external/9rFvl1_qn4zZ2JG7ayCIyrAG2DQyRNM5bGDTevowx6c/https/miro.medium.com/freeze/max/1162/1%2AwMtVXmiQ5tsBDM-8mbOkqw.gif">
+                                                <img class="chatlog__embed-thumbnail" src="https://images-ext-2.discordapp.net/external/9rFvl1_qn4zZ2JG7ayCIyrAG2DQyRNM5bGDTevowx6c/https/miro.medium.com/freeze/max/1162/1%2AwMtVXmiQ5tsBDM-8mbOkqw.gif" alt="Thumbnail" loading="lazy">
+                                            </a>
+                                        </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/783110835374653440/8421b38e0647c5e623a7367b251b4b50.png?size=40" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Dazai__#1182" data-user-id="783110835374653440" style="color: rgb(201,30,189)">Dazai__</span>
+
+
+        <span class="chatlog__timestamp">29-Jun-21 12:22 AM</span>
+
+            <div class="chatlog__message " data-message-id="859212070926155856" id="message-859212070926155856" title="Message sent: 29-Jun-21 12:22 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><a href="https://notifybugme.medium.com/finding-ssrf-by-full-automation-7d2680091d68">https://notifybugme.medium.com/finding-ssrf-by-full-automation-7d2680091d68</a></span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/783110835374653440/8421b38e0647c5e623a7367b251b4b50.png?size=40" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Dazai__#1182" data-user-id="783110835374653440" style="color: rgb(201,30,189)">Dazai__</span>
+
+
+        <span class="chatlog__timestamp">05-Jul-21 10:02 PM</span>
+
+            <div class="chatlog__message " data-message-id="861713725677502494" id="message-861713725677502494" title="Message sent: 05-Jul-21 10:02 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><a href="https://medium.com/@z0id/finding-open-redirects-like-a-pro-3b87fa474cfd">https://medium.com/@z0id/finding-open-redirects-like-a-pro-3b87fa474cfd</a></span>
+
+                        </div>
+                    </div>
+
+
+                        <div class="chatlog__embed">
+                                <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
+
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="https://medium.com/@z0id/finding-open-redirects-like-a-pro-3b87fa474cfd">
+                                                        <div class="markdown preserve-whitespace">Download this tool and you win!</div>
+                                                    </a>
+                                            </div>
+
+                                            <div class="chatlog__embed-description">
+                                                <div class="markdown preserve-whitespace">I would like to show you a easy and exceptional way of automating open redirects with all programs on hackerone and bugcrowd.</div>
+                                            </div>
+
+                                    </div>
+
+                                        <div class="chatlog__embed-thumbnail-container">
+                                            <a class="chatlog__embed-thumbnail-link" href="https://images-ext-2.discordapp.net/external/zIL7wicWvHW2MT2ucZuWEzNEPxxJbyz0to34QkDrGv8/https/miro.medium.com/max/1200/1%2Alrpg2a1DvB9PXbLNOBdh-w.png">
+                                                <img class="chatlog__embed-thumbnail" src="https://images-ext-2.discordapp.net/external/zIL7wicWvHW2MT2ucZuWEzNEPxxJbyz0to34QkDrGv8/https/miro.medium.com/max/1200/1%2Alrpg2a1DvB9PXbLNOBdh-w.png" alt="Thumbnail" loading="lazy">
+                                            </a>
+                                        </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/783110835374653440/8421b38e0647c5e623a7367b251b4b50.png?size=40" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Dazai__#1182" data-user-id="783110835374653440" style="color: rgb(201,30,189)">Dazai__</span>
+
+
+        <span class="chatlog__timestamp">05-Jul-21 10:11 PM</span>
+
+            <div class="chatlog__message " data-message-id="861715983701245963" id="message-861715983701245963" title="Message sent: 05-Jul-21 10:11 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><a href="https://medium.com/@z0id/90-of-people-are-doing-this-in-bountys-read-to-find-out-d99a3bb7bea7">https://medium.com/@z0id/90-of-people-are-doing-this-in-bountys-read-to-find-out-d99a3bb7bea7</a></span>
+
+                        </div>
+                    </div>
+
+
+                        <div class="chatlog__embed">
+                                <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
+
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="https://medium.com/@z0id/90-of-people-are-doing-this-in-bountys-read-to-find-out-d99a3bb7bea7">
+                                                        <div class="markdown preserve-whitespace">90% of people are doing this in bounty&#39;s read to find out</div>
+                                                    </a>
+                                            </div>
+
+                                            <div class="chatlog__embed-description">
+                                                <div class="markdown preserve-whitespace">Hi, my name is z0id I am a security researcher at hacker-one and bug-crowd.</div>
+                                            </div>
+
+                                    </div>
+
+                                        <div class="chatlog__embed-thumbnail-container">
+                                            <a class="chatlog__embed-thumbnail-link" href="https://images-ext-1.discordapp.net/external/djUwSQgJhx2PxuguRDGQ49NAW6b98uMPsaQ57IRWMn8/https/miro.medium.com/max/1200/1%2AFTWZb_e1wH_2AE44c0J0fQ.jpeg">
+                                                <img class="chatlog__embed-thumbnail" src="https://images-ext-1.discordapp.net/external/djUwSQgJhx2PxuguRDGQ49NAW6b98uMPsaQ57IRWMn8/https/miro.medium.com/max/1200/1%2AFTWZb_e1wH_2AE44c0J0fQ.jpeg" alt="Thumbnail" loading="lazy">
+                                            </a>
+                                        </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/783110835374653440/8421b38e0647c5e623a7367b251b4b50.png?size=40" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Dazai__#1182" data-user-id="783110835374653440" style="color: rgb(201,30,189)">Dazai__</span>
+
+
+        <span class="chatlog__timestamp">07-Jul-21 01:25 AM</span>
+
+            <div class="chatlog__message " data-message-id="862127264304726037" id="message-862127264304726037" title="Message sent: 07-Jul-21 01:25 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><a href="https://medium.com/@vis_hacker/how-i-got-stored-xss-using-file-upload-5c33e19df51e">https://medium.com/@vis_hacker/how-i-got-stored-xss-using-file-upload-5c33e19df51e</a></span>
+
+                        </div>
+                    </div>
+
+
+                        <div class="chatlog__embed">
+                                <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
+
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="https://medium.com/@vis_hacker/how-i-got-stored-xss-using-file-upload-5c33e19df51e">
+                                                        <div class="markdown preserve-whitespace">How I got stored XSS using file upload</div>
+                                                    </a>
+                                            </div>
+
+                                            <div class="chatlog__embed-description">
+                                                <div class="markdown preserve-whitespace">Hi Everyone,</div>
+                                            </div>
+
+                                    </div>
+
+                                        <div class="chatlog__embed-thumbnail-container">
+                                            <a class="chatlog__embed-thumbnail-link" href="https://images-ext-2.discordapp.net/external/vCsLllv5sDUMqmFGK0kgF0vCCHxOEWlQcngkLx7UBkY/https/miro.medium.com/max/702/1%2AwZXUSLHwKc0GYoZMipttQA.png">
+                                                <img class="chatlog__embed-thumbnail" src="https://images-ext-2.discordapp.net/external/vCsLllv5sDUMqmFGK0kgF0vCCHxOEWlQcngkLx7UBkY/https/miro.medium.com/max/702/1%2AwZXUSLHwKc0GYoZMipttQA.png" alt="Thumbnail" loading="lazy">
+                                            </a>
+                                        </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/783110835374653440/8421b38e0647c5e623a7367b251b4b50.png?size=40" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Dazai__#1182" data-user-id="783110835374653440" style="color: rgb(201,30,189)">Dazai__</span>
+
+
+        <span class="chatlog__timestamp">12-Jul-21 08:46 PM</span>
+
+            <div class="chatlog__message " data-message-id="864231303972126761" id="message-864231303972126761" title="Message sent: 12-Jul-21 08:46 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><a href="https://vasuyadav0786.medium.com/5-ways-to-do-ato-in-a-single-website-cfe7e5da987e">https://vasuyadav0786.medium.com/5-ways-to-do-ato-in-a-single-website-cfe7e5da987e</a></span>
+
+                        </div>
+                    </div>
+
+
+                        <div class="chatlog__embed">
+                                <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
+
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="https://vasuyadav0786.medium.com/5-ways-to-do-ato-in-a-single-website-cfe7e5da987e">
+                                                        <div class="markdown preserve-whitespace">5 Ways to do ATO in a Single Website</div>
+                                                    </a>
+                                            </div>
+
+                                            <div class="chatlog__embed-description">
+                                                <div class="markdown preserve-whitespace">Hi People, Yesterday I was hunting on one application and got 5 different ATO’S and even without user interaction in a single application…</div>
+                                            </div>
+
+                                    </div>
+
+                                        <div class="chatlog__embed-thumbnail-container">
+                                            <a class="chatlog__embed-thumbnail-link" href="https://images-ext-1.discordapp.net/external/2declJwJ69KNUtXKePP3wKt_YkVte4Hbw-3Yh3MYwq4/https/miro.medium.com/max/1200/1%2A9Dir5bypaDl7O4V1F_h8yg.jpeg">
+                                                <img class="chatlog__embed-thumbnail" src="https://images-ext-1.discordapp.net/external/2declJwJ69KNUtXKePP3wKt_YkVte4Hbw-3Yh3MYwq4/https/miro.medium.com/max/1200/1%2A9Dir5bypaDl7O4V1F_h8yg.jpeg" alt="Thumbnail" loading="lazy">
+                                            </a>
+                                        </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/738370374366134302/3b9bf962b7b238668576f56b04b35128.png?size=40" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Mr.echo#4180" data-user-id="738370374366134302" style="color: rgb(201,30,189)">Mr.echo</span>
+
+
+        <span class="chatlog__timestamp">15-Jul-21 01:51 AM</span>
+
+            <div class="chatlog__message " data-message-id="865032786459885568" id="message-865032786459885568" title="Message sent: 15-Jul-21 01:51 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><a href="https://medium.com/@Asm0d3us/weaponizing-favicon-ico-for-bugbounties-osint-and-what-not-ace3c214e139">https://medium.com/@Asm0d3us/weaponizing-favicon-ico-for-bugbounties-osint-and-what-not-ace3c214e139</a></span>
+
+                        </div>
+                    </div>
+
+
+                        <div class="chatlog__embed">
+                                <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
+
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="https://medium.com/@Asm0d3us/weaponizing-favicon-ico-for-bugbounties-osint-and-what-not-ace3c214e139">
+                                                        <div class="markdown preserve-whitespace">Weaponizing favicon.ico for BugBounties&#160;, OSINT and what not</div>
+                                                    </a>
+                                            </div>
+
+                                            <div class="chatlog__embed-description">
+                                                <div class="markdown preserve-whitespace">Hello there&#160;, I am too lazy when it comes to writing blogs and writeups  but Hey look I wrote this one xD.</div>
+                                            </div>
+
+                                    </div>
+
+                                        <div class="chatlog__embed-thumbnail-container">
+                                            <a class="chatlog__embed-thumbnail-link" href="https://images-ext-2.discordapp.net/external/y1YCYyy8zilKkcMXDY70wOBgjxlkZNJylt9f6t4-GPE/https/miro.medium.com/max/897/1%2AHRkCruuYe_RprRROlvTRoQ.png">
+                                                <img class="chatlog__embed-thumbnail" src="https://images-ext-2.discordapp.net/external/y1YCYyy8zilKkcMXDY70wOBgjxlkZNJylt9f6t4-GPE/https/miro.medium.com/max/897/1%2AHRkCruuYe_RprRROlvTRoQ.png" alt="Thumbnail" loading="lazy">
+                                            </a>
+                                        </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/783110835374653440/8421b38e0647c5e623a7367b251b4b50.png?size=40" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Dazai__#1182" data-user-id="783110835374653440" style="color: rgb(201,30,189)">Dazai__</span>
+
+
+        <span class="chatlog__timestamp">16-Jul-21 01:18 AM</span>
+
+            <div class="chatlog__message " data-message-id="865386810632175646" id="message-865386810632175646" title="Message sent: 16-Jul-21 01:18 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><a href="https://galnagli.com/Cache_Poisoning/">https://galnagli.com/Cache_Poisoning/</a></span>
+
+                        </div>
+                    </div>
+
+
+                        <div class="chatlog__embed">
+                                <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
+
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="https://galnagli.com/Cache_Poisoning/">
+                                                        <div class="markdown preserve-whitespace">Poisoning your Cache for 1000$ - Approach to Exploitation Walkthrough</div>
+                                                    </a>
+                                            </div>
+
+                                            <div class="chatlog__embed-description">
+                                                <div class="markdown preserve-whitespace">Cache Poisoning Exploitation in the wild - discovery to reward.</div>
+                                            </div>
+
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+                        </div>
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/783110835374653440/8421b38e0647c5e623a7367b251b4b50.png?size=40" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Dazai__#1182" data-user-id="783110835374653440" style="color: rgb(201,30,189)">Dazai__</span>
+
+
+        <span class="chatlog__timestamp">16-Jul-21 12:39 PM</span>
+
+            <div class="chatlog__message " data-message-id="865558178024521768" id="message-865558178024521768" title="Message sent: 16-Jul-21 12:39 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><a href="https://infosecwriteups.com/how-i-was-able-to-bypass-cloudflare-for-xss-e94cd827a5d6">https://infosecwriteups.com/how-i-was-able-to-bypass-cloudflare-for-xss-e94cd827a5d6</a></span>
+
+                        </div>
+                    </div>
+
+
+                        <div class="chatlog__embed">
+                                <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
+
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="https://infosecwriteups.com/how-i-was-able-to-bypass-cloudflare-for-xss-e94cd827a5d6">
+                                                        <div class="markdown preserve-whitespace">How i was able to bypass Cloudflare for XSS!</div>
+                                                    </a>
+                                            </div>
+
+                                            <div class="chatlog__embed-description">
+                                                <div class="markdown preserve-whitespace">In the name of God.</div>
+                                            </div>
+
+                                    </div>
+
+                                        <div class="chatlog__embed-thumbnail-container">
+                                            <a class="chatlog__embed-thumbnail-link" href="https://images-ext-1.discordapp.net/external/37Qqr9M1Hj3AIrBZMkqFPwwbfJFLP4o9j3ECvxEL0lk/https/miro.medium.com/max/1200/1%2AIKI3B14trBJVF9KO_r13Pw.png">
+                                                <img class="chatlog__embed-thumbnail" src="https://images-ext-1.discordapp.net/external/37Qqr9M1Hj3AIrBZMkqFPwwbfJFLP4o9j3ECvxEL0lk/https/miro.medium.com/max/1200/1%2AIKI3B14trBJVF9KO_r13Pw.png" alt="Thumbnail" loading="lazy">
+                                            </a>
+                                        </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/783110835374653440/8421b38e0647c5e623a7367b251b4b50.png?size=40" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Dazai__#1182" data-user-id="783110835374653440" style="color: rgb(201,30,189)">Dazai__</span>
+
+
+        <span class="chatlog__timestamp">18-Jul-21 05:01 PM</span>
+
+            <div class="chatlog__message " data-message-id="866348961760935956" id="message-866348961760935956" title="Message sent: 18-Jul-21 05:01 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><a href="https://medium.com/mobis3c/exploiting-apps-vulnerable-to-janus-cve-2017-13156-8d52c983b4e0">https://medium.com/mobis3c/exploiting-apps-vulnerable-to-janus-cve-2017-13156-8d52c983b4e0</a></span>
+
+                        </div>
+                    </div>
+
+
+                        <div class="chatlog__embed">
+                                <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
+
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="https://medium.com/mobis3c/exploiting-apps-vulnerable-to-janus-cve-2017-13156-8d52c983b4e0">
+                                                        <div class="markdown preserve-whitespace">Exploiting Apps vulnerable to Janus (CVE-2017–13156)</div>
+                                                    </a>
+                                            </div>
+
+                                            <div class="chatlog__embed-description">
+                                                <div class="markdown preserve-whitespace">Android Janus Vulnerability CVE-2017–13156</div>
+                                            </div>
+
+                                    </div>
+
+                                        <div class="chatlog__embed-thumbnail-container">
+                                            <a class="chatlog__embed-thumbnail-link" href="https://images-ext-2.discordapp.net/external/zqrzQfI5RyRu_miVXGbt4MgWzojglhjz2MhWeg7RLV4/https/miro.medium.com/max/698/0%2ANRAdiAHwAC1yKO-O.png">
+                                                <img class="chatlog__embed-thumbnail" src="https://images-ext-2.discordapp.net/external/zqrzQfI5RyRu_miVXGbt4MgWzojglhjz2MhWeg7RLV4/https/miro.medium.com/max/698/0%2ANRAdiAHwAC1yKO-O.png" alt="Thumbnail" loading="lazy">
+                                            </a>
+                                        </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/783110835374653440/8421b38e0647c5e623a7367b251b4b50.png?size=40" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Dazai__#1182" data-user-id="783110835374653440" style="color: rgb(201,30,189)">Dazai__</span>
+
+
+        <span class="chatlog__timestamp">20-Jul-21 02:10 PM</span>
+
+            <div class="chatlog__message " data-message-id="867030607947497482" id="message-867030607947497482" title="Message sent: 20-Jul-21 02:10 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><a href="https://brutelogic.com.br/blog/dom-based-xss-the-3-sinks/">https://brutelogic.com.br/blog/dom-based-xss-the-3-sinks/</a></span>
+
+                        </div>
+                    </div>
+
+
+                        <div class="chatlog__embed">
+                                <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
+
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+                                            <div class="chatlog__embed-author">
+
+                                                    <span class="chatlog__embed-author-name">
+                                                            <a class="chatlog__embed-author-name-link" href="https://brutelogic.com.br/blog/author/brute/">Brute</a>
+                                                    </span>
+                                            </div>
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="https://brutelogic.com.br/blog/dom-based-xss-the-3-sinks/">
+                                                        <div class="markdown preserve-whitespace">DOM-based XSS - The 3 Sinks - Brute XSS</div>
+                                                    </a>
+                                            </div>
+
+                                            <div class="chatlog__embed-description">
+                                                <div class="markdown preserve-whitespace">The most common type of XSS (Cross-Site Scripting) is source-based. It means that injected JavaScript code comes from server side to execute in client side. But there’s another main type, the DOM-based one, where injected malicious input does not come from server via reflected or stored means: XSS is generated in client side by native … Continue...</div>
+                                            </div>
+
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+                        </div>
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/783110835374653440/8421b38e0647c5e623a7367b251b4b50.png?size=40" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Dazai__#1182" data-user-id="783110835374653440" style="color: rgb(201,30,189)">Dazai__</span>
+
+
+        <span class="chatlog__timestamp">20-Jul-21 11:39 PM</span>
+
+            <div class="chatlog__message " data-message-id="867173949527031839" id="message-867173949527031839" title="Message sent: 20-Jul-21 11:39 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><a href="https://link.medium.com/4N2ylFsJRhb">https://link.medium.com/4N2ylFsJRhb</a></span>
+
+                        </div>
+                    </div>
+
+
+                        <div class="chatlog__embed">
+                                <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
+
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="https://link.medium.com/4N2ylFsJRhb">
+                                                        <div class="markdown preserve-whitespace">Credential stuffing in Bug bounty hunting</div>
+                                                    </a>
+                                            </div>
+
+                                            <div class="chatlog__embed-description">
+                                                <div class="markdown preserve-whitespace">Bug hunting is not always about looking for classic vulnerabilities (XSS, SQLi, SSRF, RCE, etc).</div>
+                                            </div>
+
+                                    </div>
+
+                                        <div class="chatlog__embed-thumbnail-container">
+                                            <a class="chatlog__embed-thumbnail-link" href="https://images-ext-2.discordapp.net/external/d5THJXUTaK5HQgtNR_XLzmJxB3hZxoMGPlcR5sXxxCI/https/cdn-images-1.medium.com/max/600/1%2AODBRfZ6QZFvqSLXU5GhxIQ.png">
+                                                <img class="chatlog__embed-thumbnail" src="https://images-ext-2.discordapp.net/external/d5THJXUTaK5HQgtNR_XLzmJxB3hZxoMGPlcR5sXxxCI/https/cdn-images-1.medium.com/max/600/1%2AODBRfZ6QZFvqSLXU5GhxIQ.png" alt="Thumbnail" loading="lazy">
+                                            </a>
+                                        </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/783110835374653440/8421b38e0647c5e623a7367b251b4b50.png?size=40" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Dazai__#1182" data-user-id="783110835374653440" style="color: rgb(201,30,189)">Dazai__</span>
+
+
+        <span class="chatlog__timestamp">27-Jul-21 09:26 PM</span>
+
+            <div class="chatlog__message " data-message-id="869677165120196608" id="message-869677165120196608" title="Message sent: 27-Jul-21 09:26 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><a href="https://blog.gdssecurity.com/labs/2010/9/14/automated-padding-oracle-attacks-with-padbuster.html">https://blog.gdssecurity.com/labs/2010/9/14/automated-padding-oracle-attacks-with-padbuster.html</a></span>
+
+                        </div>
+                    </div>
+
+
+                        <div class="chatlog__embed">
+                                <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
+
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="https://blog.gdssecurity.com/labs/2010/9/14/automated-padding-oracle-attacks-with-padbuster.html">
+                                                        <div class="markdown preserve-whitespace">GDS - Blog - Automated Padding Oracle Attacks with&#160;PadBuster</div>
+                                                    </a>
+                                            </div>
+
+                                            <div class="chatlog__embed-description">
+                                                <div class="markdown preserve-whitespace">There’s been a lot of buzz recently about Padding Oracle Attacks, an attack vector demon...</div>
+                                            </div>
+
+                                    </div>
+
+                                        <div class="chatlog__embed-thumbnail-container">
+                                            <a class="chatlog__embed-thumbnail-link" href="https://images-ext-1.discordapp.net/external/IKk_SQEKNFV0xr11dfgeFW1EXLGxZcZ-pmFwTbGeQCo/http/s3.media.squarespace.com/production/936190/11268292/l/po_fig1_sm.png">
+                                                <img class="chatlog__embed-thumbnail" src="https://images-ext-1.discordapp.net/external/IKk_SQEKNFV0xr11dfgeFW1EXLGxZcZ-pmFwTbGeQCo/http/s3.media.squarespace.com/production/936190/11268292/l/po_fig1_sm.png" alt="Thumbnail" loading="lazy">
+                                            </a>
+                                        </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/783110835374653440/8421b38e0647c5e623a7367b251b4b50.png?size=40" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Dazai__#1182" data-user-id="783110835374653440" style="color: rgb(201,30,189)">Dazai__</span>
+
+
+        <span class="chatlog__timestamp">29-Jul-21 07:48 AM</span>
+
+            <div class="chatlog__message " data-message-id="870195956925214760" id="message-870195956925214760" title="Message sent: 29-Jul-21 07:48 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><a href="http://blog.orange.tw/2019/07/attacking-ssl-vpn-part-1-preauth-rce-on-palo-alto.html">http://blog.orange.tw/2019/07/attacking-ssl-vpn-part-1-preauth-rce-on-palo-alto.html</a></span>
+
+                        </div>
+                    </div>
+
+
+                        <div class="chatlog__embed">
+                                <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
+
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="http://blog.orange.tw/2019/07/attacking-ssl-vpn-part-1-preauth-rce-on-palo-alto.html">
+                                                        <div class="markdown preserve-whitespace">Attacking SSL VPN - Part 1: PreAuth RCE on Palo Alto GlobalProtect,...</div>
+                                                    </a>
+                                            </div>
+
+                                            <div class="chatlog__embed-description">
+                                                <div class="markdown preserve-whitespace">This is <img loading="lazy" class="emoji " alt="🍊" title="tangerine" src="https://twemoji.maxcdn.com/2/svg/1f34a.svg"> speaking</div>
+                                            </div>
+
+                                    </div>
+
+                                        <div class="chatlog__embed-thumbnail-container">
+                                            <a class="chatlog__embed-thumbnail-link" href="https://images-ext-2.discordapp.net/external/mSoODy3fL1Jg8xHKMffoQBM_UEoBFSNyjZgSr7P7lYY/https/1.bp.blogspot.com/-jWzVnyTzGqM/XS8Kk09jlLI/AAAAAAAAESU/jYbqtVbHJa0lbxSg41ydEftyhzuYDKZwQCEwYBhgL/s640/2.png">
+                                                <img class="chatlog__embed-thumbnail" src="https://images-ext-2.discordapp.net/external/mSoODy3fL1Jg8xHKMffoQBM_UEoBFSNyjZgSr7P7lYY/https/1.bp.blogspot.com/-jWzVnyTzGqM/XS8Kk09jlLI/AAAAAAAAESU/jYbqtVbHJa0lbxSg41ydEftyhzuYDKZwQCEwYBhgL/s640/2.png" alt="Thumbnail" loading="lazy">
+                                            </a>
+                                        </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/783110835374653440/8421b38e0647c5e623a7367b251b4b50.png?size=40" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Dazai__#1182" data-user-id="783110835374653440" style="color: rgb(201,30,189)">Dazai__</span>
+
+
+        <span class="chatlog__timestamp">29-Jul-21 08:21 AM</span>
+
+            <div class="chatlog__message " data-message-id="870204425984167936" id="message-870204425984167936" title="Message sent: 29-Jul-21 08:21 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><a href="https://blog.intigriti.com/2021/07/28/bug-bytes-133-its-still-dns-a-50k-stray-token-path-traversal-in-microservices/">https://blog.intigriti.com/2021/07/28/bug-bytes-133-its-still-dns-a-50k-stray-token-path-traversal-in-microservices/</a></span>
+
+                        </div>
+                    </div>
+
+
+                        <div class="chatlog__embed">
+                                <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
+
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="https://blog.intigriti.com/2021/07/28/bug-bytes-133-its-still-dns-a-50k-stray-token-path-traversal-in-microservices/">
+                                                        <div class="markdown preserve-whitespace">Bug Bytes #133 - It&#39;s still DNS, A $50K stray token &amp; Path traversa...</div>
+                                                    </a>
+                                            </div>
+
+                                            <div class="chatlog__embed-description">
+                                                <div class="markdown preserve-whitespace">Bug Bytes is a weekly newsletter curated by members of the bug bounty community. The first series is curated by Mariem, better known as PentesterLand. Every week, she keeps us up to date with a comprehensive list of write-ups, tools, tutorials and resources. This issue covers the week from July 19 to 26. Intigriti News […]</div>
+                                            </div>
+
+                                    </div>
+
+                                        <div class="chatlog__embed-thumbnail-container">
+                                            <a class="chatlog__embed-thumbnail-link" href="https://images-ext-1.discordapp.net/external/jM2QTaplG7p8n7ifBXKa1oAU2HdSKmQiV_XPKIgg5Dc/https/blog.intigriti.com/wp-content/uploads/2021/07/bb133.png">
+                                                <img class="chatlog__embed-thumbnail" src="https://images-ext-1.discordapp.net/external/jM2QTaplG7p8n7ifBXKa1oAU2HdSKmQiV_XPKIgg5Dc/https/blog.intigriti.com/wp-content/uploads/2021/07/bb133.png" alt="Thumbnail" loading="lazy">
+                                            </a>
+                                        </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/783110835374653440/8421b38e0647c5e623a7367b251b4b50.png?size=40" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Dazai__#1182" data-user-id="783110835374653440" style="color: rgb(201,30,189)">Dazai__</span>
+
+
+        <span class="chatlog__timestamp">01-Aug-21 12:45 AM</span>
+
+            <div class="chatlog__message " data-message-id="871176758093832222" id="message-871176758093832222" title="Message sent: 01-Aug-21 12:45 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><a href="https://orwaatyat.medium.com/your-full-map-to-github-recon-and-leaks-exposure-860c37ca2c82">https://orwaatyat.medium.com/your-full-map-to-github-recon-and-leaks-exposure-860c37ca2c82</a></span>
+
+                        </div>
+                    </div>
+
+
+                        <div class="chatlog__embed">
+                                <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
+
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="https://orwaatyat.medium.com/your-full-map-to-github-recon-and-leaks-exposure-860c37ca2c82">
+                                                        <div class="markdown preserve-whitespace">Your Full Map To Github Recon And Leaks Exposure</div>
+                                                    </a>
+                                            </div>
+
+                                            <div class="chatlog__embed-description">
+                                                <div class="markdown preserve-whitespace">Hello My Name Orwa Atyat</div>
+                                            </div>
+
+                                    </div>
+
+                                        <div class="chatlog__embed-thumbnail-container">
+                                            <a class="chatlog__embed-thumbnail-link" href="https://images-ext-1.discordapp.net/external/fhWQntgjHB0CXG4RgR2P_c0F2-9pctfmEgGN5wGTDBs/https/miro.medium.com/max/1024/1%2APdv64Rx5C5J4ql1AfI1BFA.jpeg">
+                                                <img class="chatlog__embed-thumbnail" src="https://images-ext-1.discordapp.net/external/fhWQntgjHB0CXG4RgR2P_c0F2-9pctfmEgGN5wGTDBs/https/miro.medium.com/max/1024/1%2APdv64Rx5C5J4ql1AfI1BFA.jpeg" alt="Thumbnail" loading="lazy">
+                                            </a>
+                                        </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/783110835374653440/8421b38e0647c5e623a7367b251b4b50.png?size=40" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Dazai__#1182" data-user-id="783110835374653440" style="color: rgb(201,30,189)">Dazai__</span>
+
+
+        <span class="chatlog__timestamp">12-Aug-21 10:34 PM</span>
+
+            <div class="chatlog__message " data-message-id="875492576327786569" id="message-875492576327786569" title="Message sent: 12-Aug-21 10:34 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><a href="https://book.hacktricks.xyz/pentesting-web/hacking-jwt-json-web-tokens">https://book.hacktricks.xyz/pentesting-web/hacking-jwt-json-web-tokens</a></span>
+
+                        </div>
+                    </div>
+
+
+                        <div class="chatlog__embed">
+                                <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
+
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="https://book.hacktricks.xyz/pentesting-web/hacking-jwt-json-web-tokens">
+                                                        <div class="markdown preserve-whitespace">JWT Vulnerabilities (Json Web Tokens)</div>
+                                                    </a>
+                                            </div>
+
+
+                                    </div>
+
+                                        <div class="chatlog__embed-thumbnail-container">
+                                            <a class="chatlog__embed-thumbnail-link" href="https://images-ext-1.discordapp.net/external/VzUJV5aN0u-_ewz4DOSGqv8op1LR6v1bIxcCVrKEzjE/https/app.gitbook.com/share/space/thumbnail/-L_2uGJGU7AVNRcqRvEi.png">
+                                                <img class="chatlog__embed-thumbnail" src="https://images-ext-1.discordapp.net/external/VzUJV5aN0u-_ewz4DOSGqv8op1LR6v1bIxcCVrKEzjE/https/app.gitbook.com/share/space/thumbnail/-L_2uGJGU7AVNRcqRvEi.png" alt="Thumbnail" loading="lazy">
+                                            </a>
+                                        </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/871058988702236692/37f078ff0251687fb61473b451ef3ee9.png?size=40" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Mr.echo.bak#1175" data-user-id="871058988702236692" style="color: rgb(231,76,60)">Mr.echo.bak</span>
+
+
+        <span class="chatlog__timestamp">16-Aug-21 06:55 PM</span>
+
+            <div class="chatlog__message " data-message-id="876886943642841138" id="message-876886943642841138" title="Message sent: 16-Aug-21 06:55 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><a href="https://sirleeroyjenkins.medium.com/just-gopher-it-escalating-a-blind-ssrf-to-rce-for-15k-f5329a974530">https://sirleeroyjenkins.medium.com/just-gopher-it-escalating-a-blind-ssrf-to-rce-for-15k-f5329a974530</a></span>
+
+                        </div>
+                    </div>
+
+
+                        <div class="chatlog__embed">
+                                <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
+
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="https://sirleeroyjenkins.medium.com/just-gopher-it-escalating-a-blind-ssrf-to-rce-for-15k-f5329a974530">
+                                                        <div class="markdown preserve-whitespace">Just Gopher It: Escalating a Blind SSRF to RCE for $15k</div>
+                                                    </a>
+                                            </div>
+
+                                            <div class="chatlog__embed-description">
+                                                <div class="markdown preserve-whitespace">Preface:</div>
+                                            </div>
+
+                                    </div>
+
+                                        <div class="chatlog__embed-thumbnail-container">
+                                            <a class="chatlog__embed-thumbnail-link" href="https://images-ext-1.discordapp.net/external/FEJSNrKHo6s4T3XBf7Zupn_VhdNj5jy63jVogtzmP_Y/https/miro.medium.com/max/694/1%2AHnYT_S5MKAGeZwnLhKJ6Xw.png">
+                                                <img class="chatlog__embed-thumbnail" src="https://images-ext-1.discordapp.net/external/FEJSNrKHo6s4T3XBf7Zupn_VhdNj5jy63jVogtzmP_Y/https/miro.medium.com/max/694/1%2AHnYT_S5MKAGeZwnLhKJ6Xw.png" alt="Thumbnail" loading="lazy">
+                                            </a>
+                                        </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+
+            </div>
+    </div>
+</div>
+
+
+</div>
+
+<div class="postamble">
+    <div class="postamble__entry">Exported 42 message(s)</div>
+</div>
+
+</body>
+
+</html>

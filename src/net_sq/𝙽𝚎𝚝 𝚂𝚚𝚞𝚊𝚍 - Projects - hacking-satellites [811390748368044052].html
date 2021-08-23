@@ -1,0 +1,1919 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>&#120445;&#120462;&#120477; &#120450;&#120474;&#120478;&#120458;&#120461; - hacking-satellites</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+
+    <style>
+        @font-face {
+            font-family: Whitney;
+            src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-300.woff);
+            font-weight: 300;
+        }
+
+        @font-face {
+            font-family: Whitney;
+            src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-400.woff);
+            font-weight: 400;
+        }
+
+        @font-face {
+            font-family: Whitney;
+            src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-500.woff);
+            font-weight: 500;
+        }
+
+        @font-face {
+            font-family: Whitney;
+            src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-600.woff);
+            font-weight: 600;
+        }
+
+        @font-face {
+            font-family: Whitney;
+            src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-700.woff);
+            font-weight: 700;
+        }
+
+        body {
+            background-color: #ffffff;
+            color: #23262a;
+            font-family: "Whitney", "Helvetica Neue", Helvetica, Arial, sans-serif;
+            font-size: 17px;
+            font-weight: 500;
+        }
+
+        a {
+            color: #0068e0;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        img {
+            object-fit: contain;
+        }
+
+        .markdown {
+            max-width: 100%;
+            line-height: 1.3;
+            overflow-wrap: break-word;
+        }
+
+        .preserve-whitespace {
+            white-space: pre-wrap;
+        }
+
+        .spoiler-text {
+            background-color: rgba(0, 0, 0, 0.1);
+            border-radius: 3px;
+        }
+
+        .spoiler-text--hidden {
+            cursor: pointer;
+            background-color: #b9bbbe;
+            color: rgba(0, 0, 0, 0);
+        }
+
+        .spoiler-text--hidden:hover {
+            background-color: rgba(185, 187, 190, 0.8);
+        }
+
+        .spoiler-text--hidden::selection {
+            color: rgba(0, 0, 0, 0);
+        }
+
+        .quote {
+            display: flex;
+            margin: 0.05em 0;
+        }
+
+        .quote::before {
+            content: "";
+            margin-right: 0.5em;
+            border: 2px solid #c7ccd1;
+            border-radius: 3px;
+        }
+
+        .pre {
+            background-color: #f9f9f9;
+            font-family: "Consolas", "Courier New", Courier, monospace;
+        }
+
+        .pre--multiline {
+            margin-top: 0.25em;
+            padding: 0.5em;
+            border: 2px solid #f3f3f3;
+            border-radius: 5px;
+            color: #657b83;
+        }
+
+        .pre--multiline.hljs {
+            background-color: #f9f9f9;
+            color: #657b83;
+        }
+
+        .pre--inline {
+            padding: 2px;
+            border-radius: 3px;
+            font-size: 0.85em;
+        }
+
+        .mention {
+            border-radius: 3px;
+            padding: 0 2px;
+            color: #7289da;
+            background-color: rgba(114, 137, 218, .1);
+            font-weight: 500;
+        }
+
+        .timestamp {
+            border-radius: 3px;
+            padding: 0 2px;
+            background-color: rgba(6, 6, 7, 0.08);
+        }
+
+        .emoji {
+            width: 1.325em;
+            height: 1.325em;
+            margin: 0 0.06em;
+            vertical-align: -0.4em;
+        }
+
+        .emoji--small {
+            width: 1em;
+            height: 1em;
+        }
+
+        .emoji--large {
+            width: 2.8em;
+            height: 2.8em;
+        }
+
+        .preamble {
+            display: grid;
+            margin: 0 0.3em 0.6em 0.3em;
+            max-width: 100%;
+            grid-template-columns: auto 1fr;
+        }
+
+        .preamble__guild-icon-container {
+            grid-column: 1;
+        }
+
+        .preamble__guild-icon {
+            max-width: 88px;
+            max-height: 88px;
+        }
+
+        .preamble__entries-container {
+            grid-column: 2;
+            margin-left: 0.6em;
+        }
+
+        .preamble__entry {
+            font-size: 1.4em;
+            color: #2f3136;
+        }
+
+        .preamble__entry--small {
+            font-size: 1em;
+        }
+
+        .chatlog {
+            max-width: 100%;
+        }
+
+        .chatlog__message-group {
+            display: grid;
+            margin: 0 0.6em;
+            padding: 0.9em 0;
+            border-top: 1px solid #eceeef;
+            grid-template-columns: auto 1fr;
+        }
+
+        .chatlog__reference-symbol {
+            grid-column: 1;
+            margin: 8px 4px 4px 18px;
+            border-left: 2px solid #c7ccd1;
+            border-top: 2px solid #c7ccd1;
+            border-radius: 8px 0 0 0;
+        }
+
+        .chatlog__reference {
+            display: flex;
+            grid-column: 2;
+            margin-bottom: 0.25em;
+            font-size: 0.875em;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            align-items: center;
+            color: #5f5f60;
+        }
+
+        .chatlog__reference-avatar {
+            border-radius: 50%;
+            width: 16px;
+            height: 16px;
+            margin-right: 0.25em;
+        }
+
+        .chatlog__reference-name {
+            margin-right: 0.3em;
+            font-weight: 600;
+        }
+
+        .chatlog__reference-content {
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .chatlog__reference-content a:hover {
+            text-decoration: none;
+        }
+
+        .chatlog__reference-link {
+            cursor: pointer;
+            color: #5f5f60;
+        }
+
+        .chatlog__reference-link * {
+            display: inline;
+            pointer-events: none;
+        }
+
+        .chatlog__reference-link:hover {
+            color: #2f3136;
+        }
+
+        .chatlog__reference-link:hover *:not(.spoiler-text) {
+            color: #2f3136;
+        }
+
+        .chatlog__reference-edited-timestamp {
+            margin-left: 0.25em;
+            font-size: 0.8em;
+            color: #747f8d;
+        }
+
+        .chatlog__author-avatar-container {
+            grid-column: 1;
+            width: 40px;
+            height: 40px;
+            margin-right: 16px;
+        }
+
+        .chatlog__author-avatar {
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+        }
+
+        .chatlog__messages {
+            grid-column: 2;
+            min-width: 50%;
+        }
+
+        .chatlog__author-name {
+            font-weight: 600;
+            color: #2f3136;
+        }
+
+        .chatlog__timestamp {
+            margin-left: 0.3em;
+            font-size: 0.75em;
+            color: #747f8d;
+        }
+
+        .chatlog__message {
+            padding: 0.1em 0.3em;
+            margin: 0 -0.3em;
+            background-color: transparent;
+            transition: background-color 1s ease;
+        }
+
+        .chatlog__message--highlighted {
+            background-color: rgba(114, 137, 218, 0.2);
+        }
+
+        .chatlog__message--pinned {
+            background-color: rgba(249, 168, 37, 0.05);
+        }
+
+        .chatlog__content {
+            font-size: 0.95em;
+            word-wrap: break-word;
+        }
+
+        .chatlog__edited-timestamp {
+            margin-left: 0.15em;
+            font-size: 0.8em;
+        }
+
+        .chatlog__attachment {
+            display: inline-block;
+            position: relative;
+            margin-top: 0.3em;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .chatlog__attachment--hidden {
+            cursor: pointer;
+            box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.1);
+        }
+
+        .chatlog__attachment--hidden * {
+            pointer-events: none;
+        }
+
+        .chatlog__attachment-spoiler-caption {
+            display: none;
+            z-index: 999;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            padding: 0.4em 0.8em;
+            background-color: rgba(0, 0, 0, 0.9);
+            border-radius: 20px;
+            color: #dcddde;
+            font-size: 0.9em;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+        }
+
+        .chatlog__attachment--hidden .chatlog__attachment-spoiler-caption {
+            display: block;
+        }
+
+        .chatlog__attachment--hidden:hover .chatlog__attachment-spoiler-caption {
+            color: #fff;
+        }
+
+        .chatlog__attachment-media {
+            vertical-align: top;
+            max-width: 45vw;
+            max-height: 500px;
+            border-radius: 3px;
+        }
+
+        .chatlog__attachment--hidden .chatlog__attachment-media {
+            filter: blur(44px);
+        }
+
+        .chatlog__attachment-generic {
+            width: 100%;
+            max-width: 520px;
+            height: 40px;
+            padding: 10px;
+            background-color: #f2f3f5;
+            border: 1px solid #ebedef;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .chatlog__attachment--hidden .chatlog__attachment-generic {
+            filter: blur(44px);
+        }
+
+        .chatlog__attachment-generic-icon {
+            float: left;
+            width: 30px;
+            height: 100%;
+            margin-right: 10px;
+        }
+
+        .chatlog__attachment-generic-size {
+            color: #72767d;
+            font-size: 12px;
+        }
+
+        .chatlog__attachment-generic-name {
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+
+        .chatlog__edited-timestamp {
+            color: #747f8d;
+        }
+
+        .chatlog__embed {
+            display: flex;
+            margin-top: 0.3em;
+            max-width: 520px;
+        }
+
+        .chatlog__embed-color-pill {
+            flex-shrink: 0;
+            width: 0.25em;
+            border-top-left-radius: 3px;
+            border-bottom-left-radius: 3px;
+        }
+
+        .chatlog__embed-color-pill--default {
+            background-color: rgba(227, 229, 232, 1);
+        }
+
+        .chatlog__embed-content-container {
+            display: flex;
+            flex-direction: column;
+            padding: 0.5em 0.6em;
+            background-color: rgba(249, 249, 249, 0.3);
+            border: 1px solid rgba(204, 204, 204, 0.3);
+            border-top-right-radius: 3px;
+            border-bottom-right-radius: 3px;
+        }
+
+        .chatlog__embed-content {
+            display: flex;
+            width: 100%;
+        }
+
+        .chatlog__embed-text {
+            flex: 1;
+        }
+
+        .chatlog__embed-author {
+            display: flex;
+            margin-bottom: 0.3em;
+            align-items: center;
+        }
+
+        .chatlog__embed-author-icon {
+            margin-right: 0.5em;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+        }
+
+        .chatlog__embed-author-name {
+            font-size: 0.875em;
+            font-weight: 600;
+            color: #4f545c
+        }
+
+        .chatlog__embed-author-name-link {
+            color: #4f545c;
+        }
+
+        .chatlog__embed-title {
+            margin-bottom: 0.2em;
+            font-size: 0.875em;
+            font-weight: 600;
+            color: #4f545c;
+        }
+
+        .chatlog__embed-description {
+            font-weight: 500;
+            font-size: 0.85em;
+            color: #2e3338;
+        }
+
+        .chatlog__embed-fields {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0 0.5em;
+        }
+
+        .chatlog__embed-field {
+            flex: 0;
+            min-width: 100%;
+            max-width: 506px;
+            padding-top: 0.6em;
+            font-size: 0.875em;
+        }
+
+        .chatlog__embed-field--inline {
+            flex: 1;
+            flex-basis: auto;
+            min-width: 150px;
+        }
+
+        .chatlog__embed-field-name {
+            margin-bottom: 0.2em;
+            font-weight: 600;
+            color: #36393e;
+        }
+
+        .chatlog__embed-field-value {
+            font-weight: 500;
+            color: #2e3338;
+        }
+
+        .chatlog__embed-thumbnail {
+            flex: 0;
+            margin-left: 1.2em;
+            max-width: 80px;
+            max-height: 80px;
+            border-radius: 3px;
+        }
+
+        .chatlog__embed-image-container {
+            margin-top: 0.6em;
+        }
+
+        .chatlog__embed-image {
+            max-width: 500px;
+            max-height: 400px;
+            border-radius: 3px;
+        }
+
+        .chatlog__embed-footer {
+            margin-top: 0.6em;
+            color: #2e3338;
+        }
+
+        .chatlog__embed-footer-icon {
+            margin-right: 0.2em;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            vertical-align: middle;
+        }
+
+        .chatlog__embed-footer-text {
+            vertical-align: middle;
+            font-size: 0.75em;
+            font-weight: 500;
+        }
+
+        .chatlog__embed-plainimage {
+            vertical-align: top;
+            max-width: 45vw;
+            max-height: 500px;
+            border-radius: 3px;
+        }
+
+        .chatlog__embed-spotify {
+            border: 0;
+        }
+
+        .chatlog__embed-youtube-container {
+            margin-top: 0.6em;
+        }
+
+        .chatlog__embed-youtube {
+            border: 0;
+            border-radius: 3px;
+        }
+
+        .chatlog__reactions {
+            display: flex;
+        }
+
+        .chatlog__reaction {
+            display: flex;
+            align-items: center;
+            margin: 0.35em 0.1em 0.1em 0.1em;
+            padding: 0.2em 0.35em;
+            background-color: rgba(79, 84, 92, 0.06);
+            border-radius: 3px;
+        }
+
+        .chatlog__reaction-count {
+            min-width: 9px;
+            margin-left: 0.35em;
+            font-size: 0.875em;
+            color: #747f8d;
+        }
+
+        .chatlog__bot-tag {
+            position: relative;
+            top: -.1em;
+            margin-left: 0.3em;
+            padding: 0.05em 0.3em;
+            border-radius: 3px;
+            line-height: 1.3;
+            background-color: #5865F2;
+            color: #ffffff;
+            font-size: 0.625em;
+            font-weight: 500;
+        }
+
+        .postamble {
+            margin: 1.4em 0.3em 0.6em 0.3em;
+            padding: 1em;
+            border-top: 1px solid #eceeef;
+        }
+
+        .postamble__entry {
+            color: #2f3136;
+        }
+    </style>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/solarized-light.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.pre--multiline').forEach(block => hljs.highlightBlock(block));
+        });
+    </script>
+
+    <script>
+        function scrollToMessage(event, id) {
+            var element = document.getElementById('message-' + id);
+
+            if (element) {
+                event.preventDefault();
+
+                element.classList.add('chatlog__message--highlighted');
+
+                window.scrollTo({
+                    top: element.getBoundingClientRect().top - document.body.getBoundingClientRect().top - (window.innerHeight / 2),
+                    behavior: 'smooth'
+                });
+
+                window.setTimeout(function() {
+                    element.classList.remove('chatlog__message--highlighted');
+                }, 2000);
+            }
+        }
+
+        function showSpoiler(event, element) {
+            if (element && element.classList.contains('spoiler-text--hidden')) {
+                event.preventDefault();
+                element.classList.remove('spoiler-text--hidden');
+            }
+            if (element && element.classList.contains('chatlog__attachment--hidden')) {
+                event.preventDefault();
+                element.classList.remove('chatlog__attachment--hidden');
+            }
+        }
+    </script>
+
+    <svg style="display: none">
+        <symbol id="icon-attachment" viewBox="0 0 720 960">
+            <path fill="#f4f5fb" d="M50,935a25,25,0,0,1-25-25V50A25,25,0,0,1,50,25H519.6L695,201.32V910a25,25,0,0,1-25,25Z" />
+            <path fill="#7789c4" d="M509.21,50,670,211.63V910H50V50H509.21M530,0H50A50,50,0,0,0,0,50V910a50,50,0,0,0,50,50H670a50,50,0,0,0,50-50h0V191Z" />
+            <path fill="#f4f5fb" d="M530,215a25,25,0,0,1-25-25V50a25,25,0,0,1,16.23-23.41L693.41,198.77A25,25,0,0,1,670,215Z" />
+            <path fill="#7789c4" d="M530,70.71,649.29,190H530V70.71M530,0a50,50,0,0,0-50,50V190a50,50,0,0,0,50,50H670a50,50,0,0,0,50-50Z" />
+        </symbol>
+    </svg>
+</head>
+<body>
+
+<div class="preamble">
+    <div class="preamble__guild-icon-container">
+        <img class="preamble__guild-icon" src="https://cdn.discordapp.com/icons/742005522093572218/2b672cd2bee3339998a5d16a73bc87c3.png" alt="Guild icon" loading="lazy">
+    </div>
+    <div class="preamble__entries-container">
+        <div class="preamble__entry">&#120445;&#120462;&#120477; &#120450;&#120474;&#120478;&#120458;&#120461;</div>
+        <div class="preamble__entry">Projects / hacking-satellites</div>
+
+
+    </div>
+</div>
+
+<div class="chatlog">
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/738370374366134302/3b9bf962b7b238668576f56b04b35128.png?size=40" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Mr.echo#4180" data-user-id="738370374366134302" style="color: rgb(201,30,189)">Mr.echo</span>
+
+
+        <span class="chatlog__timestamp">17-Feb-21 12:17 AM</span>
+
+            <div class="chatlog__message " data-message-id="811390798892499004" id="message-811390798892499004" title="Message sent: 17-Feb-21 12:17 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">---------------Intro-------------------
+Project start the next holiday inxaallah 
+start with: 
+<a href="https://youtu.be/8IGsQoL1AgQ">https://youtu.be/8IGsQoL1AgQ</a>
+<a href="https://youtu.be/usCJtuvXfPg">https://youtu.be/usCJtuvXfPg</a>
+---------------Req&amp;tools---------------------
+<a href="https://github.com/Flowm/satvis">https://github.com/Flowm/satvis</a>
+---------------Resources-------------
+<a href="https://github.com/deptofdefense/hack-a-sat-library">https://github.com/deptofdefense/hack-a-sat-library</a>
+<a href="https://earth.esa.int/web/eoportal/satellite-missions/t/tubsat">https://earth.esa.int/web/eoportal/satellite-missions/t/tubsat</a></span>
+
+                                <span class="chatlog__edited-timestamp" title="21-Feb-21 07:37 PM">(edited)</span>
+                        </div>
+                    </div>
+
+
+                        <div class="chatlog__embed">
+                                <div class="chatlog__embed-color-pill" style="background-color: rgba(255,0,0,255)"></div>
+
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+                                            <div class="chatlog__embed-author">
+
+                                                    <span class="chatlog__embed-author-name">
+                                                            <a class="chatlog__embed-author-name-link" href="https://www.youtube.com/channel/UConJDkGk921yT9hISzFqpzw">Freethink</a>
+                                                    </span>
+                                            </div>
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="https://www.youtube.com/watch?v=8IGsQoL1AgQ">
+                                                        <div class="markdown preserve-whitespace">Hacking Satellites with $300 Worth of TV Gear</div>
+                                                    </a>
+                                            </div>
+
+                                        <div class="chatlog__embed-youtube-container">
+                                            <iframe class="chatlog__embed-youtube" src="https://www.youtube.com/embed/8IGsQoL1AgQ" width="400" height="225"></iframe>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="chatlog__embed">
+                                <div class="chatlog__embed-color-pill" style="background-color: rgba(255,0,0,255)"></div>
+
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+                                            <div class="chatlog__embed-author">
+
+                                                    <span class="chatlog__embed-author-name">
+                                                            <a class="chatlog__embed-author-name-link" href="https://www.youtube.com/channel/UC9a8Z6Sp6eb2s3O79pX5Zvg">Tech Minds</a>
+                                                    </span>
+                                            </div>
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="https://www.youtube.com/watch?v=usCJtuvXfPg">
+                                                        <div class="markdown preserve-whitespace">Hacking Iridium Satellites With Iridium Toolkit</div>
+                                                    </a>
+                                            </div>
+
+                                        <div class="chatlog__embed-youtube-container">
+                                            <iframe class="chatlog__embed-youtube" src="https://www.youtube.com/embed/usCJtuvXfPg" width="400" height="225"></iframe>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="chatlog__embed">
+                                <div class="chatlog__embed-color-pill" style="background-color: rgba(30,35,39,255)"></div>
+
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="https://github.com/Flowm/satvis">
+                                                        <div class="markdown preserve-whitespace">Flowm/satvis</div>
+                                                    </a>
+                                            </div>
+
+                                            <div class="chatlog__embed-description">
+                                                <div class="markdown preserve-whitespace">Satellite orbit visualization and pass prediction with Cesium.js - Flowm/satvis</div>
+                                            </div>
+
+                                    </div>
+
+                                        <div class="chatlog__embed-thumbnail-container">
+                                            <a class="chatlog__embed-thumbnail-link" href="https://images-ext-2.discordapp.net/external/vteKyVBdGEAjlRzGHoPshTu3U4wcPuxTn02kLOzvLP0/%3Fs%3D400%26v%3D4/https/avatars.githubusercontent.com/u/1117666">
+                                                <img class="chatlog__embed-thumbnail" src="https://images-ext-2.discordapp.net/external/vteKyVBdGEAjlRzGHoPshTu3U4wcPuxTn02kLOzvLP0/%3Fs%3D400%26v%3D4/https/avatars.githubusercontent.com/u/1117666" alt="Thumbnail" loading="lazy">
+                                            </a>
+                                        </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                        <div class="chatlog__embed">
+                                <div class="chatlog__embed-color-pill" style="background-color: rgba(30,35,39,255)"></div>
+
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="https://github.com/deptofdefense/hack-a-sat-library">
+                                                        <div class="markdown preserve-whitespace">deptofdefense/hack-a-sat-library</div>
+                                                    </a>
+                                            </div>
+
+                                            <div class="chatlog__embed-description">
+                                                <div class="markdown preserve-whitespace">Public library of space documents and tutorials. Contribute to deptofdefense/hack-a-sat-library development by creating an account on GitHub.</div>
+                                            </div>
+
+                                    </div>
+
+                                        <div class="chatlog__embed-thumbnail-container">
+                                            <a class="chatlog__embed-thumbnail-link" href="https://images-ext-1.discordapp.net/external/cWS7L35FUeIFmFGw3S3YjIsqJpDQ4nInLQeqvEttMPM/%3Fs%3D400%26v%3D4/https/avatars.githubusercontent.com/u/13172082">
+                                                <img class="chatlog__embed-thumbnail" src="https://images-ext-1.discordapp.net/external/cWS7L35FUeIFmFGw3S3YjIsqJpDQ4nInLQeqvEttMPM/%3Fs%3D400%26v%3D4/https/avatars.githubusercontent.com/u/13172082" alt="Thumbnail" loading="lazy">
+                                            </a>
+                                        </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/738370374366134302/3b9bf962b7b238668576f56b04b35128.png?size=40" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Mr.echo#4180" data-user-id="738370374366134302" style="color: rgb(201,30,189)">Mr.echo</span>
+
+
+        <span class="chatlog__timestamp">20-Feb-21 12:00 AM</span>
+
+            <div class="chatlog__message " data-message-id="812473782782263336" id="message-812473782782263336" title="Message sent: 20-Feb-21 12:00 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><a href="https://github.com/orbitalindex/awesome-space">https://github.com/orbitalindex/awesome-space</a></span>
+
+                        </div>
+                    </div>
+
+
+                        <div class="chatlog__embed">
+                                <div class="chatlog__embed-color-pill" style="background-color: rgba(30,35,39,255)"></div>
+
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="https://github.com/orbitalindex/awesome-space">
+                                                        <div class="markdown preserve-whitespace">orbitalindex/awesome-space</div>
+                                                    </a>
+                                            </div>
+
+                                            <div class="chatlog__embed-description">
+                                                <div class="markdown preserve-whitespace"><img loading="lazy" class="emoji " alt="🛰" title="🛰" src="https://twemoji.maxcdn.com/2/svg/1f6f0.svg">️<img loading="lazy" class="emoji " alt="🚀" title="rocket" src="https://twemoji.maxcdn.com/2/svg/1f680.svg">A list of awesome space-related packages and resources maintained by The Orbital Index - orbitalindex/awesome-space</div>
+                                            </div>
+
+                                    </div>
+
+                                        <div class="chatlog__embed-thumbnail-container">
+                                            <a class="chatlog__embed-thumbnail-link" href="https://images-ext-1.discordapp.net/external/mza04x11fdQBSJ7bW9fLpS91VRAmdoAWdkcwBUNXqck/%3Fs%3D400%26v%3D4/https/avatars.githubusercontent.com/u/51793825">
+                                                <img class="chatlog__embed-thumbnail" src="https://images-ext-1.discordapp.net/external/mza04x11fdQBSJ7bW9fLpS91VRAmdoAWdkcwBUNXqck/%3Fs%3D400%26v%3D4/https/avatars.githubusercontent.com/u/51793825" alt="Thumbnail" loading="lazy">
+                                            </a>
+                                        </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+
+            </div>
+            <div class="chatlog__message " data-message-id="812473976491212850" id="message-812473976491212850" title="Message sent: 20-Feb-21 12:01 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><a href="https://api.nasa.gov/">https://api.nasa.gov/</a></span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="812474505045082113" id="message-812474505045082113" title="Message sent: 20-Feb-21 12:03 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><a href="https://images.nasa.gov/">https://images.nasa.gov/</a></span>
+
+                        </div>
+                    </div>
+
+
+                        <div class="chatlog__embed">
+                                <div class="chatlog__embed-color-pill" style="background-color: rgba(255,255,255,255)"></div>
+
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="https://images.nasa.gov/">
+                                                        <div class="markdown preserve-whitespace">{{ngMeta.title}}</div>
+                                                    </a>
+                                            </div>
+
+                                            <div class="chatlog__embed-description">
+                                                <div class="markdown preserve-whitespace">{{ngMeta.description}}</div>
+                                            </div>
+
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+                        </div>
+
+            </div>
+            <div class="chatlog__message " data-message-id="812474706145574963" id="message-812474706145574963" title="Message sent: 20-Feb-21 12:04 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><a href="https://www.geoportal.org/">https://www.geoportal.org/</a></span>
+
+                        </div>
+                    </div>
+
+
+                        <div class="chatlog__embed">
+                                <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
+
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="https://www.geoportal.org/">
+                                                        <div class="markdown preserve-whitespace">GEOSS Portal</div>
+                                                    </a>
+                                            </div>
+
+                                            <div class="chatlog__embed-description">
+                                                <div class="markdown preserve-whitespace">GEOSS Portal - your main entry point to unlock Earth Observation data from archives all over the world.</div>
+                                            </div>
+
+                                    </div>
+
+                                        <div class="chatlog__embed-thumbnail-container">
+                                            <a class="chatlog__embed-thumbnail-link" href="https://images-ext-1.discordapp.net/external/qvKAy8NSUJKmbXfz8iN-4MzQuD7iUmCNoZOv4AfUAFA/https/www.geoportal.org/geoss-theme/images/img/opengraphimage.png">
+                                                <img class="chatlog__embed-thumbnail" src="https://images-ext-1.discordapp.net/external/qvKAy8NSUJKmbXfz8iN-4MzQuD7iUmCNoZOv4AfUAFA/https/www.geoportal.org/geoss-theme/images/img/opengraphimage.png" alt="Thumbnail" loading="lazy">
+                                            </a>
+                                        </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/738370374366134302/3b9bf962b7b238668576f56b04b35128.png?size=40" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Mr.echo#4180" data-user-id="738370374366134302" style="color: rgb(201,30,189)">Mr.echo</span>
+
+
+        <span class="chatlog__timestamp">20-Feb-21 12:19 AM</span>
+
+            <div class="chatlog__message " data-message-id="812478505421242378" id="message-812478505421242378" title="Message sent: 20-Feb-21 12:19 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><a href="https://github.com/muccc/iridium-toolkit">https://github.com/muccc/iridium-toolkit</a></span>
+
+                        </div>
+                    </div>
+
+
+                        <div class="chatlog__embed">
+                                <div class="chatlog__embed-color-pill" style="background-color: rgba(30,35,39,255)"></div>
+
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="https://github.com/muccc/iridium-toolkit">
+                                                        <div class="markdown preserve-whitespace">muccc/iridium-toolkit</div>
+                                                    </a>
+                                            </div>
+
+                                            <div class="chatlog__embed-description">
+                                                <div class="markdown preserve-whitespace">A set of tools to parse Iridium frames. Contribute to muccc/iridium-toolkit development by creating an account on GitHub.</div>
+                                            </div>
+
+                                    </div>
+
+                                        <div class="chatlog__embed-thumbnail-container">
+                                            <a class="chatlog__embed-thumbnail-link" href="https://images-ext-2.discordapp.net/external/ijLQ04_SLMEcQogbSEOyzT4j4oWTUr_xznvhH54mSGc/%3Fs%3D400%26v%3D4/https/avatars.githubusercontent.com/u/372291">
+                                                <img class="chatlog__embed-thumbnail" src="https://images-ext-2.discordapp.net/external/ijLQ04_SLMEcQogbSEOyzT4j4oWTUr_xznvhH54mSGc/%3Fs%3D400%26v%3D4/https/avatars.githubusercontent.com/u/372291" alt="Thumbnail" loading="lazy">
+                                            </a>
+                                        </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+
+            </div>
+            <div class="chatlog__message " data-message-id="812478582634709062" id="message-812478582634709062" title="Message sent: 20-Feb-21 12:19 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><a href="https://github.com/muccc/gr-iridium">https://github.com/muccc/gr-iridium</a></span>
+
+                        </div>
+                    </div>
+
+
+                        <div class="chatlog__embed">
+                                <div class="chatlog__embed-color-pill" style="background-color: rgba(30,35,39,255)"></div>
+
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="https://github.com/muccc/gr-iridium">
+                                                        <div class="markdown preserve-whitespace">muccc/gr-iridium</div>
+                                                    </a>
+                                            </div>
+
+                                            <div class="chatlog__embed-description">
+                                                <div class="markdown preserve-whitespace">Iridium burst detector and demodulator. Contribute to muccc/gr-iridium development by creating an account on GitHub.</div>
+                                            </div>
+
+                                    </div>
+
+                                        <div class="chatlog__embed-thumbnail-container">
+                                            <a class="chatlog__embed-thumbnail-link" href="https://images-ext-2.discordapp.net/external/ijLQ04_SLMEcQogbSEOyzT4j4oWTUr_xznvhH54mSGc/%3Fs%3D400%26v%3D4/https/avatars.githubusercontent.com/u/372291">
+                                                <img class="chatlog__embed-thumbnail" src="https://images-ext-2.discordapp.net/external/ijLQ04_SLMEcQogbSEOyzT4j4oWTUr_xznvhH54mSGc/%3Fs%3D400%26v%3D4/https/avatars.githubusercontent.com/u/372291" alt="Thumbnail" loading="lazy">
+                                            </a>
+                                        </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+
+            </div>
+            <div class="chatlog__message " data-message-id="812478832715235328" id="message-812478832715235328" title="Message sent: 20-Feb-21 12:20 AM">
+
+                    <div class="chatlog__attachment " onclick="">
+
+                            <a href="https://cdn.discordapp.com/attachments/811390748368044052/812478830811283456/unknown.png">
+                                <img class="chatlog__attachment-media" src="https://cdn.discordapp.com/attachments/811390748368044052/812478830811283456/unknown.png" alt="Image attachment" title="Image: unknown.png (839.24 KB)" loading="lazy">
+                            </a>
+                    </div>
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/738370374366134302/3b9bf962b7b238668576f56b04b35128.png?size=40" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Mr.echo#4180" data-user-id="738370374366134302" style="color: rgb(201,30,189)">Mr.echo</span>
+
+
+        <span class="chatlog__timestamp">20-Feb-21 12:28 AM</span>
+
+            <div class="chatlog__message " data-message-id="812480670823612427" id="message-812480670823612427" title="Message sent: 20-Feb-21 12:28 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><a href="https://www.jumia.ma/generic-100khz-1.7ghz-full-band-uv-hf-rtl-sdr-usb-tuner-receiver-32912498.html">https://www.jumia.ma/generic-100khz-1.7ghz-full-band-uv-hf-rtl-sdr-usb-tuner-receiver-32912498.html</a></span>
+
+                        </div>
+                    </div>
+
+
+                        <div class="chatlog__embed">
+                                <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
+
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="https://www.jumia.ma/generic-100khz-1.7ghz-full-band-uv-hf-rtl-sdr-usb-tuner-receiver-32912498.html">
+                                                        <div class="markdown preserve-whitespace">100KHz-1.7GHz Full Band UV HF RTL-SDR USB Tuner Receiver/</div>
+                                                    </a>
+                                            </div>
+
+                                            <div class="chatlog__embed-description">
+                                                <div class="markdown preserve-whitespace">The receiver adopts RTL2832U + R820T programs, taking advantage of the Q-channel on RTL2832U, adding support for 100KHz-24MHz frequency and receiving 100KHz-1.7GHz electromagnetic wave.Features:User can use the SDR software to receive 100KHz-1.7GHz electromagnetic wave.Support AM, FM(NFM, WFM), CW, DSB, LSB, USB demodulation.Listen to HF SSB com...</div>
+                                            </div>
+
+                                    </div>
+
+                                        <div class="chatlog__embed-thumbnail-container">
+                                            <a class="chatlog__embed-thumbnail-link" href="https://images-ext-2.discordapp.net/external/BeOXwtGEATClL15LnD4id34Mq5XFvKszvAzjLUc_opU/%3F7552/https/ma.jumia.is/unsafe/fit-in/500x500/filters%3Afill%28white%29/product/89/421923/1.jpg">
+                                                <img class="chatlog__embed-thumbnail" src="https://images-ext-2.discordapp.net/external/BeOXwtGEATClL15LnD4id34Mq5XFvKszvAzjLUc_opU/%3F7552/https/ma.jumia.is/unsafe/fit-in/500x500/filters%3Afill%28white%29/product/89/421923/1.jpg" alt="Thumbnail" loading="lazy">
+                                            </a>
+                                        </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/738370374366134302/3b9bf962b7b238668576f56b04b35128.png?size=40" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Mr.echo#4180" data-user-id="738370374366134302" style="color: rgb(201,30,189)">Mr.echo</span>
+
+
+        <span class="chatlog__timestamp">20-Feb-21 01:21 AM</span>
+
+            <div class="chatlog__message " data-message-id="812494170584907817" id="message-812494170584907817" title="Message sent: 20-Feb-21 01:21 AM">
+
+                    <div class="chatlog__attachment " onclick="">
+
+                            <a href="https://cdn.discordapp.com/attachments/811390748368044052/812494168702189598/unknown.png">
+                                <img class="chatlog__attachment-media" src="https://cdn.discordapp.com/attachments/811390748368044052/812494168702189598/unknown.png" alt="Image attachment" title="Image: unknown.png (112.36 KB)" loading="lazy">
+                            </a>
+                    </div>
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="812494990751039519" id="message-812494990751039519" title="Message sent: 20-Feb-21 01:25 AM">
+
+                    <div class="chatlog__attachment " onclick="">
+
+                            <a href="https://cdn.discordapp.com/attachments/811390748368044052/812494988655067146/unknown.png">
+                                <img class="chatlog__attachment-media" src="https://cdn.discordapp.com/attachments/811390748368044052/812494988655067146/unknown.png" alt="Image attachment" title="Image: unknown.png (230.16 KB)" loading="lazy">
+                            </a>
+                    </div>
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="812495227864219648" id="message-812495227864219648" title="Message sent: 20-Feb-21 01:25 AM">
+
+                    <div class="chatlog__attachment " onclick="">
+
+                            <a href="https://cdn.discordapp.com/attachments/811390748368044052/812495223884218439/unknown.png">
+                                <img class="chatlog__attachment-media" src="https://cdn.discordapp.com/attachments/811390748368044052/812495223884218439/unknown.png" alt="Image attachment" title="Image: unknown.png (214.21 KB)" loading="lazy">
+                            </a>
+                    </div>
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="812495306964074576" id="message-812495306964074576" title="Message sent: 20-Feb-21 01:26 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><a href="https://published-prd.lanyonevents.com/published/rsaus19/sessionsFiles/13692/MBS-W03-Attack-Vectors-in-Orbit-The-Need-for-IoT-and-Satellite-Security.pdf">https://published-prd.lanyonevents.com/published/rsaus19/sessionsFiles/13692/MBS-W03-Attack-Vectors-in-Orbit-The-Need-for-IoT-and-Satellite-Security.pdf</a></span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="812495944595406898" id="message-812495944595406898" title="Message sent: 20-Feb-21 01:28 AM">
+
+                    <div class="chatlog__attachment " onclick="">
+
+                            <a href="https://cdn.discordapp.com/attachments/811390748368044052/812495941302878218/unknown.png">
+                                <img class="chatlog__attachment-media" src="https://cdn.discordapp.com/attachments/811390748368044052/812495941302878218/unknown.png" alt="Image attachment" title="Image: unknown.png (96.61 KB)" loading="lazy">
+                            </a>
+                    </div>
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="812496193322090496" id="message-812496193322090496" title="Message sent: 20-Feb-21 01:29 AM">
+
+                    <div class="chatlog__attachment " onclick="">
+
+                            <a href="https://cdn.discordapp.com/attachments/811390748368044052/812496190641799179/unknown.png">
+                                <img class="chatlog__attachment-media" src="https://cdn.discordapp.com/attachments/811390748368044052/812496190641799179/unknown.png" alt="Image attachment" title="Image: unknown.png (596.15 KB)" loading="lazy">
+                            </a>
+                    </div>
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/738370374366134302/3b9bf962b7b238668576f56b04b35128.png?size=40" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Mr.echo#4180" data-user-id="738370374366134302" style="color: rgb(201,30,189)">Mr.echo</span>
+
+
+        <span class="chatlog__timestamp">20-Feb-21 06:38 PM</span>
+
+            <div class="chatlog__message " data-message-id="812755117819428884" id="message-812755117819428884" title="Message sent: 20-Feb-21 06:38 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Python Repo
+<div class="pre pre--multiline nohighlight">scipy 
+numpy
+matplotlib
+mpl_toolkits
+socket</div></span>
+
+                                <span class="chatlog__edited-timestamp" title="20-Feb-21 06:39 PM">(edited)</span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/738370374366134302/3b9bf962b7b238668576f56b04b35128.png?size=40" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Mr.echo#4180" data-user-id="738370374366134302" style="color: rgb(201,30,189)">Mr.echo</span>
+
+
+        <span class="chatlog__timestamp">20-Feb-21 09:13 PM</span>
+
+            <div class="chatlog__message " data-message-id="812794174725947413" id="message-812794174725947413" title="Message sent: 20-Feb-21 09:13 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><a href="https://youtu.be/36dj_hPDGHM">https://youtu.be/36dj_hPDGHM</a></span>
+
+                        </div>
+                    </div>
+
+
+                        <div class="chatlog__embed">
+                                <div class="chatlog__embed-color-pill" style="background-color: rgba(255,0,0,255)"></div>
+
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+                                            <div class="chatlog__embed-author">
+
+                                                    <span class="chatlog__embed-author-name">
+                                                            <a class="chatlog__embed-author-name-link" href="https://www.youtube.com/channel/UC1YsDFe0g_any0IVgk8mKVQ">United Electronic Industries</a>
+                                                    </span>
+                                            </div>
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="https://www.youtube.com/watch?v=36dj_hPDGHM">
+                                                        <div class="markdown preserve-whitespace">MIL-STD-1553: Overview and Applications Tutorial</div>
+                                                    </a>
+                                            </div>
+
+                                        <div class="chatlog__embed-youtube-container">
+                                            <iframe class="chatlog__embed-youtube" src="https://www.youtube.com/embed/36dj_hPDGHM" width="400" height="225"></iframe>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/738370374366134302/3b9bf962b7b238668576f56b04b35128.png?size=40" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Mr.echo#4180" data-user-id="738370374366134302" style="color: rgb(201,30,189)">Mr.echo</span>
+
+
+        <span class="chatlog__timestamp">20-Feb-21 09:33 PM</span>
+
+            <div class="chatlog__message " data-message-id="812799020556222465" id="message-812799020556222465" title="Message sent: 20-Feb-21 09:33 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><a href="https://en.wikipedia.org/wiki/List_of_airline_codes">https://en.wikipedia.org/wiki/List_of_airline_codes</a></span>
+
+                        </div>
+                    </div>
+
+
+                        <div class="chatlog__embed">
+                                <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
+
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="https://en.wikipedia.org/wiki/List_of_airline_codes">
+                                                        <div class="markdown preserve-whitespace">List of airline codes</div>
+                                                    </a>
+                                            </div>
+
+                                            <div class="chatlog__embed-description">
+                                                <div class="markdown preserve-whitespace">This is a list of all airline codes. The table lists the IATA airline designators, the ICAO airline designators and the airline call signs (telephony designator). Historical assignments are also included for completeness.</div>
+                                            </div>
+
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+                        </div>
+
+            </div>
+            <div class="chatlog__message " data-message-id="812799989062697001" id="message-812799989062697001" title="Message sent: 20-Feb-21 09:36 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">vatsim.net</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/738370374366134302/3b9bf962b7b238668576f56b04b35128.png?size=40" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Mr.echo#4180" data-user-id="738370374366134302" style="color: rgb(201,30,189)">Mr.echo</span>
+
+
+        <span class="chatlog__timestamp">21-Feb-21 06:43 PM</span>
+
+            <div class="chatlog__message " data-message-id="813118754350825493" id="message-813118754350825493" title="Message sent: 21-Feb-21 06:43 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><a href="https://www.theflightsimdeck.com/">https://www.theflightsimdeck.com/</a></span>
+
+                        </div>
+                    </div>
+
+
+                        <div class="chatlog__embed">
+                                <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
+
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="https://www.theflightsimdeck.com/">
+                                                        <div class="markdown preserve-whitespace">HOME | The Flight Sim Deck</div>
+                                                    </a>
+                                            </div>
+
+
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+                        </div>
+
+            </div>
+            <div class="chatlog__message " data-message-id="813120408399511592" id="message-813120408399511592" title="Message sent: 21-Feb-21 06:50 PM">
+
+                    <div class="chatlog__attachment " onclick="">
+
+                            <a href="https://cdn.discordapp.com/attachments/811390748368044052/813120406176923658/unknown.png">
+                                <img class="chatlog__attachment-media" src="https://cdn.discordapp.com/attachments/811390748368044052/813120406176923658/unknown.png" alt="Image attachment" title="Image: unknown.png (41.66 KB)" loading="lazy">
+                            </a>
+                    </div>
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="813121196849365032" id="message-813121196849365032" title="Message sent: 21-Feb-21 06:53 PM">
+
+                    <div class="chatlog__attachment " onclick="">
+
+                            <a href="https://cdn.discordapp.com/attachments/811390748368044052/813121194202628156/unknown.png">
+                                <img class="chatlog__attachment-media" src="https://cdn.discordapp.com/attachments/811390748368044052/813121194202628156/unknown.png" alt="Image attachment" title="Image: unknown.png (33.89 KB)" loading="lazy">
+                            </a>
+                    </div>
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="813121751885807626" id="message-813121751885807626" title="Message sent: 21-Feb-21 06:55 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">*the International Space Station.</span>
+
+                        </div>
+                    </div>
+
+                    <div class="chatlog__attachment " onclick="">
+
+                            <a href="https://cdn.discordapp.com/attachments/811390748368044052/813121748001095700/unknown.png">
+                                <img class="chatlog__attachment-media" src="https://cdn.discordapp.com/attachments/811390748368044052/813121748001095700/unknown.png" alt="Image attachment" title="Image: unknown.png (955.82 KB)" loading="lazy">
+                            </a>
+                    </div>
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="813122202257457163" id="message-813122202257457163" title="Message sent: 21-Feb-21 06:57 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">CubeSats  <img loading="lazy" class="emoji " alt="🍉" title="watermelon" src="https://twemoji.maxcdn.com/2/svg/1f349.svg"></span>
+
+                        </div>
+                    </div>
+
+                    <div class="chatlog__attachment " onclick="">
+
+                            <a href="https://cdn.discordapp.com/attachments/811390748368044052/813122199698407504/unknown.png">
+                                <img class="chatlog__attachment-media" src="https://cdn.discordapp.com/attachments/811390748368044052/813122199698407504/unknown.png" alt="Image attachment" title="Image: unknown.png (505.67 KB)" loading="lazy">
+                            </a>
+                    </div>
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="813122337335017513" id="message-813122337335017513" title="Message sent: 21-Feb-21 06:57 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">*about $100,000 per unit <img loading="lazy" class="emoji " alt="1477_CryingMan" title="1477_CryingMan" src="https://cdn.discordapp.com/emojis/802975416703909889.png"></span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="813122778273808414" id="message-813122778273808414" title="Message sent: 21-Feb-21 06:59 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><div class="pre pre--multiline nohighlight">Satellites are typically controlled from ground stations. These stations run computers with software vulnerabilities that can be exploited . If we were to infiltrate these computers, they could send malicious commands to the satellites.</div></span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="813124512098418688" id="message-813124512098418688" title="Message sent: 21-Feb-21 07:06 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">*Maroc-TUBSAT the first moroccan satellite (credits TUB)</span>
+
+                        </div>
+                    </div>
+
+                    <div class="chatlog__attachment " onclick="">
+
+                            <a href="https://cdn.discordapp.com/attachments/811390748368044052/813124508743368784/unknown.png">
+                                <img class="chatlog__attachment-media" src="https://cdn.discordapp.com/attachments/811390748368044052/813124508743368784/unknown.png" alt="Image attachment" title="Image: unknown.png (151.86 KB)" loading="lazy">
+                            </a>
+                    </div>
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="813124998108938292" id="message-813124998108938292" title="Message sent: 21-Feb-21 07:08 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><div class="pre pre--multiline nohighlight">The Royal Centre for Remote Sensing (CRTS) is the national institution responsible for the promotion, use and development of remote sensing applications in Morocco. CRTS coordinates and carries out the national program of remote sensing in collaboration with ministerial departments, private operators and universities. CRTS uses operational systems to collect, produce and analyze data from Earth observation satellites and other sources. It also runs the national archiving facilities.</div></span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="813126113860649063" id="message-813126113860649063" title="Message sent: 21-Feb-21 07:12 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><a href="https://satellites.pro/">https://satellites.pro/</a></span>
+
+                        </div>
+                    </div>
+
+
+                        <div class="chatlog__embed">
+                                <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
+
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="https://satellites.pro/">
+                                                        <div class="markdown preserve-whitespace">World map /sat — All countries, cities, streets, buildings and plac...</div>
+                                                    </a>
+                                            </div>
+
+                                            <div class="chatlog__embed-description">
+                                                <div class="markdown preserve-whitespace"><img loading="lazy" class="emoji " alt="🗺" title="🗺" src="https://twemoji.maxcdn.com/2/svg/1f5fa.svg">️ World map, satellite view: all continents, countries, cities, streets and buildings location. Cities lists with capitals and administrative centers. USA streets maps for most cities.</div>
+                                            </div>
+
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+                        </div>
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/738370374366134302/3b9bf962b7b238668576f56b04b35128.png?size=40" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Mr.echo#4180" data-user-id="738370374366134302" style="color: rgb(201,30,189)">Mr.echo</span>
+
+
+        <span class="chatlog__timestamp">21-Feb-21 07:21 PM</span>
+
+            <div class="chatlog__message " data-message-id="813128234442424371" id="message-813128234442424371" title="Message sent: 21-Feb-21 07:21 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">info about it 
+<div class="pre pre--multiline nohighlight">Maroc Tubsat     
+NR    
+Morocco/Germany    
+CTRS Morocco/Institut f&#252;r Luft-und Raumfahrttechnik (Berlin)    
+Government    
+Technology Development        
+LEO    Sun-Synchronous
+0    984    &quot;1,014&quot;    2.04E-03    99.2    105.1    47        56    12/10/2001    2-3 yrs.    
+CRTS Morocco/Institut f&#252;r Luft-und Raumfahrttechnik    Morocco/Germany    Baikonur Cosmodrome    Zenit    2001-056D    27004    Test three-dimensional attitude control system for future remote sensing; currently used for ice observation in Arctic.        www.satellitedebris.net
+12/12    
+http://www.vectronic-aerospace.com/html/body_maroc-tubsat.html    
+http://nssdc.gsfc.nasa.gov/spacewarn/spx578.html    
+http://www.ilr.tu-berlin.de/RFA/MAROC-TUBSAT/MAROC-TUBSAT.htm    
+http://www.vectronic-aerospace.com/html/maroc-tubsat.html    </div></span>
+
+                                <span class="chatlog__edited-timestamp" title="21-Feb-21 07:24 PM">(edited)</span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="813129526255026236" id="message-813129526255026236" title="Message sent: 21-Feb-21 07:26 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><a href="https://github.com/Flowm/satvis">https://github.com/Flowm/satvis</a></span>
+
+                        </div>
+                    </div>
+
+
+                        <div class="chatlog__embed">
+                                <div class="chatlog__embed-color-pill" style="background-color: rgba(30,35,39,255)"></div>
+
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="https://github.com/Flowm/satvis">
+                                                        <div class="markdown preserve-whitespace">Flowm/satvis</div>
+                                                    </a>
+                                            </div>
+
+                                            <div class="chatlog__embed-description">
+                                                <div class="markdown preserve-whitespace">Satellite orbit visualization and pass prediction with Cesium.js - Flowm/satvis</div>
+                                            </div>
+
+                                    </div>
+
+                                        <div class="chatlog__embed-thumbnail-container">
+                                            <a class="chatlog__embed-thumbnail-link" href="https://images-ext-2.discordapp.net/external/vteKyVBdGEAjlRzGHoPshTu3U4wcPuxTn02kLOzvLP0/%3Fs%3D400%26v%3D4/https/avatars.githubusercontent.com/u/1117666">
+                                                <img class="chatlog__embed-thumbnail" src="https://images-ext-2.discordapp.net/external/vteKyVBdGEAjlRzGHoPshTu3U4wcPuxTn02kLOzvLP0/%3Fs%3D400%26v%3D4/https/avatars.githubusercontent.com/u/1117666" alt="Thumbnail" loading="lazy">
+                                            </a>
+                                        </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+
+            </div>
+            <div class="chatlog__message " data-message-id="813130108595601458" id="message-813130108595601458" title="Message sent: 21-Feb-21 07:28 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><a href="https://0x0.st/-8LO.pdf">https://0x0.st/-8LO.pdf</a></span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="813130745936871445" id="message-813130745936871445" title="Message sent: 21-Feb-21 07:31 PM">
+
+                    <div class="chatlog__attachment " onclick="">
+
+                            <a href="https://cdn.discordapp.com/attachments/811390748368044052/813130742971760730/unknown.png">
+                                <img class="chatlog__attachment-media" src="https://cdn.discordapp.com/attachments/811390748368044052/813130742971760730/unknown.png" alt="Image attachment" title="Image: unknown.png (110.62 KB)" loading="lazy">
+                            </a>
+                    </div>
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="813130805882257448" id="message-813130805882257448" title="Message sent: 21-Feb-21 07:31 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><div class="pre pre--multiline nohighlight">Each communication module consist of:
+
+• Electronic fuse with integrated watchdog
+
+• 16 Bit Hitachi H8/536 CPU
+
+• 512 kB SRAM, 64 kB ROM, 128 kB EEPROM
+
+• Real-time clock
+
+• 32 analog telemetry channels
+
+• FFSK (Fast Frequency Shift Keying) or GMSK (Gaussian Minimum Shift Keying) modulation
+
+• VHF or UHF receiver with a sensitivity of better than -120 dBm
+
+• VHF of UHF transmitter, max. 10 W of transmit power.</div>`</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="813130879017680896" id="message-813130879017680896" title="Message sent: 21-Feb-21 07:31 PM">
+
+                    <div class="chatlog__attachment " onclick="">
+
+                            <a href="https://cdn.discordapp.com/attachments/811390748368044052/813130876430319666/unknown.png">
+                                <img class="chatlog__attachment-media" src="https://cdn.discordapp.com/attachments/811390748368044052/813130876430319666/unknown.png" alt="Image attachment" title="Image: unknown.png (50.84 KB)" loading="lazy">
+                            </a>
+                    </div>
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="813130914887368764" id="message-813130914887368764" title="Message sent: 21-Feb-21 07:31 PM">
+
+                    <div class="chatlog__attachment " onclick="">
+
+                            <a href="https://cdn.discordapp.com/attachments/811390748368044052/813130912354402365/unknown.png">
+                                <img class="chatlog__attachment-media" src="https://cdn.discordapp.com/attachments/811390748368044052/813130912354402365/unknown.png" alt="Image attachment" title="Image: unknown.png (85.23 KB)" loading="lazy">
+                            </a>
+                    </div>
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="813130970018480158" id="message-813130970018480158" title="Message sent: 21-Feb-21 07:32 PM">
+
+                    <div class="chatlog__attachment " onclick="">
+
+                            <a href="https://cdn.discordapp.com/attachments/811390748368044052/813130964178829322/unknown.png">
+                                <img class="chatlog__attachment-media" src="https://cdn.discordapp.com/attachments/811390748368044052/813130964178829322/unknown.png" alt="Image attachment" title="Image: unknown.png (119.16 KB)" loading="lazy">
+                            </a>
+                    </div>
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="813131034169180160" id="message-813131034169180160" title="Message sent: 21-Feb-21 07:32 PM">
+
+                    <div class="chatlog__attachment " onclick="">
+
+                            <a href="https://cdn.discordapp.com/attachments/811390748368044052/813131031753392158/unknown.png">
+                                <img class="chatlog__attachment-media" src="https://cdn.discordapp.com/attachments/811390748368044052/813131031753392158/unknown.png" alt="Image attachment" title="Image: unknown.png (146.85 KB)" loading="lazy">
+                            </a>
+                    </div>
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="813131096245010452" id="message-813131096245010452" title="Message sent: 21-Feb-21 07:32 PM">
+
+                    <div class="chatlog__attachment " onclick="">
+
+                            <a href="https://cdn.discordapp.com/attachments/811390748368044052/813131094165422140/unknown.png">
+                                <img class="chatlog__attachment-media" src="https://cdn.discordapp.com/attachments/811390748368044052/813131094165422140/unknown.png" alt="Image attachment" title="Image: unknown.png (24.46 KB)" loading="lazy">
+                            </a>
+                    </div>
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="813131174842990643" id="message-813131174842990643" title="Message sent: 21-Feb-21 07:32 PM">
+
+                    <div class="chatlog__attachment " onclick="">
+
+                            <a href="https://cdn.discordapp.com/attachments/811390748368044052/813131169230487632/unknown.png">
+                                <img class="chatlog__attachment-media" src="https://cdn.discordapp.com/attachments/811390748368044052/813131169230487632/unknown.png" alt="Image attachment" title="Image: unknown.png (174.73 KB)" loading="lazy">
+                            </a>
+                    </div>
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="813131311333376021" id="message-813131311333376021" title="Message sent: 21-Feb-21 07:33 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><strong>EIC (Earth Imaging Camera),</strong><div class="pre pre--multiline nohighlight"> developed at RAL (Rutherford Appleton Laboratory), UK [same camera design as flown on BADR-B of SUPARCO (Pakistan Space and Upper Atmosphere Research Commission)]. The instrument optics have a focal length of 72 mm with f/6 number. Observations are performed in the visible/near-infrared range. A filter is used for the near-infrared range. The FOV is &#177;8.5&#186; x &#177;8&#186;, providing an image size of about 190 km x 144 km at a resolution of 250 m. A CCD matrix array of 770 x 576 pixels is used (of EEV, Chelmsford, UK, pixel size of 32.5 μm) with frame transfer of imagery. The nominal integration time for a snapshot is 28 ms. A 12 bit data quantization is used. The EIC instrument mass is 2.5 kg.</div></span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="813131516409675796" id="message-813131516409675796" title="Message sent: 21-Feb-21 07:34 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">1) Momentum-biased hibernation mode: Here, the satellite&#39;s angular momentum vector is maintained to be perpendicular to the flight direction. The maximum moment of inertia is designed to be very close to the Y-axis. In this setup, the Y-axis reaction wheel is set to absorb 90% of the angular momentum so that the satellite will rotate in the same direction as the wheel. Hence, the power consumed is only to run 1 wheel in about 80% of its performance.
+
+2) Nadir pointing mode: The satellite&#39;s rotation in the pitch axis is terminated, and then the +Z-axis of the satellite (which is the camera side) is pointed to nadir.
+
+3) Off-nadir pointing mode: The satellite&#39;s Z-axis is pointed off-nadir, either in the cross-track or in the along-track direction.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="813131584789676043" id="message-813131584789676043" title="Message sent: 21-Feb-21 07:34 PM">
+
+                    <div class="chatlog__attachment " onclick="">
+
+                            <a href="https://cdn.discordapp.com/attachments/811390748368044052/813131582067834921/unknown.png">
+                                <img class="chatlog__attachment-media" src="https://cdn.discordapp.com/attachments/811390748368044052/813131582067834921/unknown.png" alt="Image attachment" title="Image: unknown.png (43.23 KB)" loading="lazy">
+                            </a>
+                    </div>
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="813131630553202738" id="message-813131630553202738" title="Message sent: 21-Feb-21 07:34 PM">
+
+                    <div class="chatlog__attachment " onclick="">
+
+                            <a href="https://cdn.discordapp.com/attachments/811390748368044052/813131627877761024/unknown.png">
+                                <img class="chatlog__attachment-media" src="https://cdn.discordapp.com/attachments/811390748368044052/813131627877761024/unknown.png" alt="Image attachment" title="Image: unknown.png (32.34 KB)" loading="lazy">
+                            </a>
+                    </div>
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="813131685301714944" id="message-813131685301714944" title="Message sent: 21-Feb-21 07:35 PM">
+
+                    <div class="chatlog__attachment " onclick="">
+
+                            <a href="https://cdn.discordapp.com/attachments/811390748368044052/813131682353250324/unknown.png">
+                                <img class="chatlog__attachment-media" src="https://cdn.discordapp.com/attachments/811390748368044052/813131682353250324/unknown.png" alt="Image attachment" title="Image: unknown.png (114.11 KB)" loading="lazy">
+                            </a>
+                    </div>
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="813131752053932132" id="message-813131752053932132" title="Message sent: 21-Feb-21 07:35 PM">
+
+                    <div class="chatlog__attachment " onclick="">
+
+                            <a href="https://cdn.discordapp.com/attachments/811390748368044052/813131745602961448/unknown.png">
+                                <img class="chatlog__attachment-media" src="https://cdn.discordapp.com/attachments/811390748368044052/813131745602961448/unknown.png" alt="Image attachment" title="Image: unknown.png (273.79 KB)" loading="lazy">
+                            </a>
+                    </div>
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/738370374366134302/3b9bf962b7b238668576f56b04b35128.png?size=40" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Mr.echo#4180" data-user-id="738370374366134302" style="color: rgb(201,30,189)">Mr.echo</span>
+
+
+        <span class="chatlog__timestamp">04-Mar-21 12:14 AM</span>
+
+            <div class="chatlog__message " data-message-id="816825964062834739" id="message-816825964062834739" title="Message sent: 04-Mar-21 12:14 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Latest Launch [space X]
+<div class="pre pre--multiline nohighlight">curl https://spacextelemetry.cf/launch/latest.json | jq</div></span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/738370374366134302/3b9bf962b7b238668576f56b04b35128.png?size=40" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Mr.echo#4180" data-user-id="738370374366134302" style="color: rgb(201,30,189)">Mr.echo</span>
+
+
+        <span class="chatlog__timestamp">30-Jul-21 12:49 AM</span>
+
+            <div class="chatlog__message " data-message-id="870452897169670144" id="message-870452897169670144" title="Message sent: 30-Jul-21 12:49 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><a href="https://youtu.be/gMwciWchH3Q">https://youtu.be/gMwciWchH3Q</a></span>
+
+                        </div>
+                    </div>
+
+
+                        <div class="chatlog__embed">
+                                <div class="chatlog__embed-color-pill" style="background-color: rgba(255,0,0,255)"></div>
+
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+                                            <div class="chatlog__embed-author">
+
+                                                    <span class="chatlog__embed-author-name">
+                                                            <a class="chatlog__embed-author-name-link" href="https://www.youtube.com/channel/UCf3DodO2LfdbtHywUpI-nPA">BSides Cape Town</a>
+                                                    </span>
+                                            </div>
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="https://www.youtube.com/watch?v=gMwciWchH3Q">
+                                                        <div class="markdown preserve-whitespace">BSIDES CPT 2019 - Hacking satellites with Software Defined Radio (S...</div>
+                                                    </a>
+                                            </div>
+
+                                        <div class="chatlog__embed-youtube-container">
+                                            <iframe class="chatlog__embed-youtube" src="https://www.youtube.com/embed/gMwciWchH3Q" width="400" height="225"></iframe>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+            </div>
+    </div>
+</div>
+
+
+</div>
+
+<div class="postamble">
+    <div class="postamble__entry">Exported 48 message(s)</div>
+</div>
+
+</body>
+
+</html>
